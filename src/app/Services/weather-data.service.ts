@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EMPTY } from 'rxjs';
 
 
@@ -27,11 +27,11 @@ export class WeatherDataService {
   private currentTime = new Date();
   private currentTimeFormatted = this.currentTime.getFullYear() + this.currentTime.getMonth() + this.currentTime.getDate();
   private currentTimeNum = (this.currentTime).getTime();
-  private tomorrow = this.currentTimeNum +86400000;
-  private plus2Days = this.currentTimeNum + (86400000 * 2);
-  private plus3Days = this.currentTimeNum + (86400000 * 3);
-  private plus4Days = this.currentTimeNum + (86400000 * 4);
-  private plus5Days = this.currentTimeNum + (86400000 * 5);
+  private tomorrow = (new Date(this.currentTimeNum +86400000)).toLocaleDateString();
+  private plus2Days = (new Date(this.currentTimeNum + (86400000 * 2))).toLocaleDateString();
+  private plus3Days = (new Date(this.currentTimeNum + (86400000 * 3))).toLocaleDateString();
+  private plus4Days = (new Date(this.currentTimeNum + (86400000 * 4))).toLocaleDateString();
+  private plus5Days = (new Date(this.currentTimeNum + (86400000 * 5))).toLocaleDateString();
 
   sunriseSunsetToday: any;
   sunriseSunsetTomorrow: any;
@@ -112,11 +112,22 @@ export class WeatherDataService {
     return this.url;
   }
 
+
+  // Sunrise and sunset API headers
+  public setSunriseSunsetApiHeaders() : HttpHeaders {
+    let headers: HttpHeaders = new HttpHeaders();
+    headers = headers.set('Accept', 'application/json')
+      .set('Access-Control-Allow-Origin', '*')
+      .set('Access-Control-Allow-Methods', 'GET');
+
+      return headers;
+  }
+
   // Sunrise and sunset today
   public getSunriseSunsetToday() {
     try {
       this.sunriseSunsetToday =
-        this.http.get<any>(`https://localhost:8082/api/getLatLon?lat=${this.lat}&lon=${this.lon}&date=${this.currentTimeFormatted}`);
+        this.http.get<any>(`https://api.sunrise-sunset.org/json?lat=${this.lat}&lon=${this.lon}&date=${this.currentTimeFormatted}`, {headers: this.setSunriseSunsetApiHeaders(), responseType: 'json'});
       return this.sunriseSunsetToday;
       
     } catch (error) {
@@ -129,7 +140,8 @@ export class WeatherDataService {
   public getSunriseSunsetTomorrow() {
     try {
       this.sunriseSunsetTomorrow =
-        this.http.get<any>(`https://localhost:8082/api/getLatLon?lat=${this.lat}&lon=${this.lon}&date=${this.tomorrow}`);
+      this.http.get<any>(`https://api.sunrise-sunset.org/json?lat=${this.lat}&lon=${this.lon}&date=${this.currentTimeFormatted}`, 
+        {headers: this.setSunriseSunsetApiHeaders(), responseType: 'json'});
       return this.sunriseSunsetTomorrow;
       
     } catch (error) {
@@ -141,7 +153,8 @@ export class WeatherDataService {
   public getSunriseSunsetDay2() {
     try {
       this.sunriseSunsetPlusTwo =
-      this.http.get<any>(`https://localhost:8082/api/getLatLon?lat=${this.lat}&lon=${this.lon}&date=${this.plus2Days}`);
+      this.http.get<any>(`https://api.sunrise-sunset.org/json?lat=${this.lat}&lon=${this.lon}&date=${this.currentTimeFormatted}`, 
+        {headers: this.setSunriseSunsetApiHeaders(), responseType: 'json'});
       return this.sunriseSunsetPlusTwo;
       
     } catch (error) {
@@ -154,7 +167,8 @@ export class WeatherDataService {
   public getSunriseSunsetDay3() {
     try {
       this.sunriseSunsetPlusThree =
-      this.http.get<any>(`https://localhost:8082/api/getLatLon?lat=${this.lat}&lon=${this.lon}&date=${this.plus3Days}`);
+      this.http.get<any>(`https://api.sunrise-sunset.org/json?lat=${this.lat}&lon=${this.lon}&date=${this.currentTimeFormatted}`, 
+        {headers: this.setSunriseSunsetApiHeaders(), responseType: 'json'});
       return this.sunriseSunsetPlusThree;
       
     } catch (error) {
@@ -166,8 +180,8 @@ export class WeatherDataService {
   public getSunriseSunsetDay4() {
     try {
       this.sunriseSunsetPlusFour =
-      this.http.get<any>(`https://localhost:8082/api/getLatLon?lat=${this.lat}&lon=${this.lon}&date=${this.plus4Days}`);
-      return this.sunriseSunsetPlusFour;
+      this.http.get<any>(`https://api.sunrise-sunset.org/json?lat=${this.lat}&lon=${this.lon}&date=${this.currentTimeFormatted}`, 
+        {headers: this.setSunriseSunsetApiHeaders(), responseType: 'json'});      return this.sunriseSunsetPlusFour;
       
     } catch (error) {
         return EMPTY;
@@ -178,8 +192,8 @@ export class WeatherDataService {
   public getSunriseSunsetDay5() {
     try {
       this.sunriseSunsetPlusFive =
-      this.http.get<any>(`https://localhost:8082/api/getLatLon?lat=${this.lat}&lon=${this.lon}&date=${this.plus5Days}`);
-      return this.sunriseSunsetPlusFive;
+      this.http.get<any>(`https://api.sunrise-sunset.org/json?lat=${this.lat}&lon=${this.lon}&date=${this.currentTimeFormatted}`, 
+        {headers: this.setSunriseSunsetApiHeaders(), responseType: 'json'});      return this.sunriseSunsetPlusFive;
       
     } catch (error) {
         return EMPTY;      

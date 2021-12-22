@@ -44,3 +44,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+Dockerfile
+.firebase/hosting.cHVibGlj.cache
+public/main.be85d31643d4d96e.js
