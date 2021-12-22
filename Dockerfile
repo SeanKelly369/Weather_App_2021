@@ -7,18 +7,18 @@ RUN chown -R damienhurst:damienhurst /weather-app
 USER damienhurst
 CMD tail -f /dev/null
 
-FROM node:17-alpine3.12 as builder
+FROM node:latest as build
 
-# WORKDIR /usr/src/app
+WORKDIR /usr/local/app
 
-COPY ../package.json ../package-lock.json ./
+COPY ./ /usr/local/app/
 
 RUN npm install
 
-COPY . .
-
 RUN npm run build --aot --prod -env=prod
 
-FROM nginx:1.21.4
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY --from=builder /dist/weather-app /usr/share/nginx/html
+FROM nginx:latest
+# COPY nginx.conf /etc/nginx/nginx.conf
+COPY --from=build /usr/local/app/dist/weather-app /usr/share/nginx/html
+
+EXPOSE 80

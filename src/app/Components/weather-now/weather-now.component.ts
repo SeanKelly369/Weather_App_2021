@@ -42,8 +42,8 @@ export class WeatherNowComponent extends AppComponent implements OnInit {
     getDayData() {
     this.getWeather.getSunriseSunsetToday().subscribe((data: any) => {
       this.dayData = data;
-      this.sunrise = data.results.sunrise;
-      this.sunset = data.results.sunset;
+      this.sunrise = data.results.civil_twilight_begin;
+      this.sunset = data.results.civil_twilight_end;
     });
   }
 
