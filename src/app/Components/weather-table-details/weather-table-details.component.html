@@ -233,21 +233,21 @@
       <div></div>
       <div class="show-or-not3"></div>
       <div></div>
-      <div>{{this?.sunriseTomorrow}}</div>
-      <div>{{this?.sunrisePlusTwo}}</div>
-      <div>{{this?.sunrisePlusThree}}</div>
-      <div class="show-or-not2">{{this?.sunrisePlusFour}}</div>
-      <div class="show-or-not">{{this?.sunrisePlusFive}}</div>
+      <div>{{this?.getWeather?.sunriseSunsetTomorrow?.astronomical_twilight_begin}}</div>
+      <div>{{this?.getWeather?.sunriseSunsetPlusTwo?.astronomical_twilight_begin}}</div>
+      <div>{{this?.getWeather?.sunriseSunsetPlusThree?.astronomical_twilight_begin}}</div>
+      <div class="show-or-not2">{{this?.getWeather?.sunriseSunsetPlusFour?.astronomical_twilight_begin}}</div>
+      <div class="show-or-not">{{this?.getWeather?.sunriseSunsetPlusFour?.astronomical_twilight_begin}}</div>
 
       <div class="description table-grid-odd">Sunset</div>
       <div class="table-grid-odd show-or-not3"></div>
       <div class="table-grid-odd"></div>
       <div class="table-grid-odd"></div>
-      <div class="table-grid-odd">{{this?.sunsetTomorrow}}</div>
-      <div class="table-grid-odd">{{this?.sunsetPlusTwo}}</div>
-      <div class="table-grid-odd">{{this?.sunsetPlusThree}}</div>
-      <div class="table-grid-odd show-or-not2">{{this?.sunsetPlusFour}}</div>
-      <div class="table-grid-odd show-or-not">{{this?.sunrisePlusFive}}</div>
+      <div class="table-grid-odd">{{this?.getWeather?.sunriseSunsetTomorrow?.astronomical_twilight_end}}</div>
+      <div class="table-grid-odd">{{this?.getWeather?.sunriseSunsetPlusTwo?.astronomical_twilight_end}}</div>
+      <div class="table-grid-odd">{{this?.getWeather?.sunriseSunsetPlusThree?.astronomical_twilight_end}}</div>
+      <div class="table-grid-odd show-or-not2">{{this?.getWeather?.sunriseSunsetPlusFour?.astronomical_twilight_end}}</div>
+      <div class="table-grid-odd show-or-not">{{this?.getWeather?.sunriseSunsetPlusFive?.astronomical_twilight_end}}</div>
 
   </div>
 </div>
