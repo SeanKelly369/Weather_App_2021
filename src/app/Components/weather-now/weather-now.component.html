@@ -80,7 +80,7 @@
   
               </div>
               <div class='rightColumn'>
-                  {{this.sunrise}}
+                  {{this?.getWeather?.sunriseSunsetToday?.astronomical_twilight_begin}}
               </div>
   
               <div>
@@ -89,7 +89,7 @@
               <div>
               </div>
               <div class='rightColumn'>
-                  {{this.sunset}}
+                  {{this?.getWeather?.sunriseSunsetToday?.astronomical_twilight_end}}
               </div>
           </div>
       </div>

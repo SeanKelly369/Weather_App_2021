@@ -18,6 +18,7 @@ export class WeatherTableDetailsComponent implements OnInit {
   @Input() isC = true;
   @Input() isKm = true;
 
+  filler: any;
   
 
   sunriseSunsetToday: any;
@@ -72,18 +73,7 @@ export class WeatherTableDetailsComponent implements OnInit {
   windSpeed4day = 0;
   windSpeed5day = 0;
 
-  sunriseTomorrow = 'pending';
-  sunsetTomorrow = 'pending';
-  sunrisePlusTwo = 'pending';
-  sunsetPlusTwo = 'pending';
-  sunrisePlusThree = 'pending';
-  sunsetPlusThree = 'pending';
-  sunrisePlusFour = 'pending';
-  sunsetPlusFour = 'pending';
-  sunrisePlusFive = 'pending';
-  sunsetPlusFive = 'pending';
-
-  constructor(protected getWeather: WeatherDataService) {}
+  constructor(public getWeather: WeatherDataService) {}
 
   async ngOnInit() {
 
@@ -162,33 +152,6 @@ export class WeatherTableDetailsComponent implements OnInit {
         this.windDirection5day = this.weather.list[31].wind.deg;
         this.windSpeed5day = this.weather.list[31].wind.speed;
       }
-    });
-
-    this.getWeather.getSunriseSunsetTomorrow().subscribe((data: any) => {
-      this.sunriseSunsetTomorrow = data;
-      console.log(this.sunriseSunsetTomorrow);
-      this.sunriseTomorrow = data.results.civil_twilight_begin;
-      this.sunsetTomorrow = data.results.civil_twilight_end;
-    });
-    this.getWeather.getSunriseSunsetDay2().subscribe((data: any) => {
-      this.sunriseSunsetPlusTwo = data;
-      this.sunrisePlusTwo = data.results.civil_twilight_begin;
-      this.sunsetPlusTwo = data.results.civil_twilight_end;
-    });
-    this.getWeather.getSunriseSunsetDay3().subscribe((data: any) => {
-      this.sunriseSunsetPlusThree = data;
-      this.sunrisePlusThree = data.results.civil_twilight_begin;
-      this.sunsetPlusThree = data.results.civil_twilight_end;
-    });
-    this.getWeather.getSunriseSunsetDay4().subscribe((data: any) => {
-      this.sunriseSunsetPlusFour = data;
-      this.sunrisePlusFour = data.results.civil_twilight_begin;
-      this.sunsetPlusFour = data.results.civil_twilight_end;
-    });
-    this.getWeather.getSunriseSunsetDay5().subscribe((data: any) => {
-      this.sunriseSunsetPlusFive = data;
-      this.sunrisePlusFive = data.results.civil_twilight_begin;
-      this.sunsetPlusFive = data.results.civil_twilight_end;
     });
   }
 

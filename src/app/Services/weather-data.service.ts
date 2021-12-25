@@ -6,8 +6,6 @@ import { EMPTY } from 'rxjs';
 @Injectable()
 export class WeatherDataService {
 
-  private secureUrl = 'https://localhost:4200';
-
   private appID = '616711bbee79313325570ae3515e5b71';
   private lat: number = 0;
   private lon: number = 0;
@@ -24,14 +22,6 @@ export class WeatherDataService {
   sunriseSunset5: any;
   sunriseSunset6: any;
 
-  private currentTime = new Date();
-  private currentTimeFormatted = this.currentTime.getFullYear() + this.currentTime.getMonth() + this.currentTime.getDate();
-  private currentTimeNum = (this.currentTime).getTime();
-  private tomorrow = (new Date(this.currentTimeNum +86400000)).toLocaleDateString();
-  private plus2Days = (new Date(this.currentTimeNum + (86400000 * 2))).toLocaleDateString();
-  private plus3Days = (new Date(this.currentTimeNum + (86400000 * 3))).toLocaleDateString();
-  private plus4Days = (new Date(this.currentTimeNum + (86400000 * 4))).toLocaleDateString();
-  private plus5Days = (new Date(this.currentTimeNum + (86400000 * 5))).toLocaleDateString();
 
   sunriseSunsetToday: any;
   sunriseSunsetTomorrow: any;
@@ -46,44 +36,37 @@ export class WeatherDataService {
     await this.getPosition().then(pos => {
       this.lat = pos.lat;
       this.lon = pos.lon;
-      this.getSunriseSunsetToday();
-      this.getSunriseSunsetTomorrow();
-      this.getSunriseSunsetDay2();
-      this.getSunriseSunsetDay3();
-      this.getSunriseSunsetDay4();
-      this.getSunriseSunsetDay5();
-    });
 
-    await this.getSunriseSunsetToday()
-    .subscribe((response: JSON) => {
-      this.sunriseSunsetToday = response;
-    });
+      const currentTime = new Date();
+      const currentTimeFormatted = (currentTime.getFullYear() + currentTime.getMonth() + currentTime.getDate()).toString;
+      const currentTimeNum = currentTime.getTime();
+      const tomorrow = (new Date(currentTimeNum +86400000)).toLocaleDateString();
+      console.log(tomorrow);
+      const plus2Days = (new Date(currentTimeNum + (86400000 * 2))).toLocaleDateString();
+      const plus3Days = (new Date(currentTimeNum + (86400000 * 3))).toLocaleDateString();
+      const plus4Days = (new Date(currentTimeNum + (86400000 * 4))).toLocaleDateString();
+      const plus5Days = (new Date(currentTimeNum + (86400000 * 5))).toLocaleDateString();
 
-    await this.getSunriseSunsetTomorrow()
-    .subscribe((response: JSON) => {
-      this.sunriseSunsetTomorrow = response;
+      this.getSunriseSunsetToday(currentTimeFormatted).subscribe( (response: JSON) => {
+        this.sunriseSunsetToday = response;
+      });
+      this.getSunriseSunsetTomorrow(tomorrow).subscribe( (response: JSON) => {
+        this.sunriseSunsetTomorrow = response;
+      });
+      this.getSunriseSunsetDay2(plus2Days).subscribe( (response: JSON) => {
+        this.sunriseSunsetPlusTwo = response;
+      });
+      this.getSunriseSunsetDay3(plus3Days).subscribe( (response: JSON) => {
+        this.sunriseSunsetPlusThree = response;
+        console.log(this.sunriseSunsetPlusThree);
+      });
+      this.getSunriseSunsetDay4(plus4Days).subscribe( (response: JSON) => {
+        this.sunriseSunsetPlusFour = response;
+      });
+      this.getSunriseSunsetDay5(plus5Days).subscribe( (response: JSON) => {
+        this.sunriseSunsetPlusFive = response;
+      });
     });
-
-    await this.getSunriseSunsetDay2()
-    .subscribe((response: JSON) => {
-      this.sunriseSunsetPlusTwo = response;
-    });
-
-    await this.getSunriseSunsetDay3()
-    .subscribe((response: JSON) => {
-      this.sunriseSunsetPlusThree = response;
-    });
-
-    await this.getSunriseSunsetDay4()
-    .subscribe((response: JSON) => {
-      this.sunriseSunsetPlusFour = response;
-    });
-
-    await this.getSunriseSunsetDay5()
-    .subscribe((response: JSON) => {
-      this.sunriseSunsetPlusFive = response;
-    });
-
   }
 
   public getPosition(): Promise<any> {
@@ -124,10 +107,10 @@ export class WeatherDataService {
   }
 
   // Sunrise and sunset today
-  public getSunriseSunsetToday() {
+  public getSunriseSunsetToday(currentTimeFormatted: any | undefined) {
     try {
       this.sunriseSunsetToday =
-        this.http.get<any>(`https://api.sunrise-sunset.org/json?lat=${this.lat}&lon=${this.lon}&date=${this.currentTimeFormatted}`, {headers: this.setSunriseSunsetApiHeaders(), responseType: 'json'});
+        this.http.get<any>(`https://api.sunrise-sunset.org/json?lat=${this.lat}&lon=${this.lon}&date=${currentTimeFormatted}`);
       return this.sunriseSunsetToday;
       
     } catch (error) {
@@ -137,10 +120,11 @@ export class WeatherDataService {
 
 
   // Sunrise and sunset tomorrow
-  public getSunriseSunsetTomorrow() {
+  public getSunriseSunsetTomorrow(tomorrow: string | undefined) {
     try {
+
       this.sunriseSunsetTomorrow =
-      this.http.get<any>(`https://api.sunrise-sunset.org/json?lat=${this.lat}&lon=${this.lon}&date=${this.currentTimeFormatted}`, 
+      this.http.get<any>(`https://api.sunrise-sunset.org/json?lat=${this.lat}&lon=${this.lon}&date=${tomorrow}`, 
         {headers: this.setSunriseSunsetApiHeaders(), responseType: 'json'});
       return this.sunriseSunsetTomorrow;
       
@@ -150,10 +134,10 @@ export class WeatherDataService {
   }
 
   // Sunrise and sunset 2 days plus
-  public getSunriseSunsetDay2() {
+  public getSunriseSunsetDay2(plus2Days: string | undefined) {
     try {
       this.sunriseSunsetPlusTwo =
-      this.http.get<any>(`https://api.sunrise-sunset.org/json?lat=${this.lat}&lon=${this.lon}&date=${this.currentTimeFormatted}`, 
+      this.http.get<any>(`https://api.sunrise-sunset.org/json?lat=${this.lat}&lon=${this.lon}&date=${plus2Days}`, 
         {headers: this.setSunriseSunsetApiHeaders(), responseType: 'json'});
       return this.sunriseSunsetPlusTwo;
       
@@ -164,10 +148,10 @@ export class WeatherDataService {
   }
 
   // Sunrise and sunset 3 days plus
-  public getSunriseSunsetDay3() {
+  public getSunriseSunsetDay3(plus3Days: string | undefined) {
     try {
       this.sunriseSunsetPlusThree =
-      this.http.get<any>(`https://api.sunrise-sunset.org/json?lat=${this.lat}&lon=${this.lon}&date=${this.currentTimeFormatted}`, 
+      this.http.get<any>(`https://api.sunrise-sunset.org/json?lat=${this.lat}&lon=${this.lon}&date=${plus3Days}`, 
         {headers: this.setSunriseSunsetApiHeaders(), responseType: 'json'});
       return this.sunriseSunsetPlusThree;
       
@@ -177,11 +161,12 @@ export class WeatherDataService {
   }
 
   // Sunrise and sunset 4 days plus
-  public getSunriseSunsetDay4() {
+  public getSunriseSunsetDay4(plus4Days: string | undefined) {
     try {
       this.sunriseSunsetPlusFour =
-      this.http.get<any>(`https://api.sunrise-sunset.org/json?lat=${this.lat}&lon=${this.lon}&date=${this.currentTimeFormatted}`, 
-        {headers: this.setSunriseSunsetApiHeaders(), responseType: 'json'});      return this.sunriseSunsetPlusFour;
+      this.http.get<any>(`https://api.sunrise-sunset.org/json?lat=${this.lat}&lon=${this.lon}&date=${plus4Days}`, 
+        {headers: this.setSunriseSunsetApiHeaders(), responseType: 'json'});      
+        return this.sunriseSunsetPlusFour;
       
     } catch (error) {
         return EMPTY;
@@ -189,11 +174,12 @@ export class WeatherDataService {
   }
 
   // Sunrise and sunset 5 days plus
-  public getSunriseSunsetDay5() {
+  public getSunriseSunsetDay5(plus5Days: string | undefined) {
     try {
       this.sunriseSunsetPlusFive =
-      this.http.get<any>(`https://api.sunrise-sunset.org/json?lat=${this.lat}&lon=${this.lon}&date=${this.currentTimeFormatted}`, 
-        {headers: this.setSunriseSunsetApiHeaders(), responseType: 'json'});      return this.sunriseSunsetPlusFive;
+      this.http.get<any>(`https://api.sunrise-sunset.org/json?lat=${this.lat}&lon=${this.lon}&date=${plus5Days}`, 
+        {headers: this.setSunriseSunsetApiHeaders(), responseType: 'json'});      
+        return this.sunriseSunsetPlusFive;
       
     } catch (error) {
         return EMPTY;      

@@ -12,7 +12,6 @@ export class WeatherNowComponent extends AppComponent implements OnInit {
   fiveDayForecast: any;
   tempToggle = 1;
   speedMeasurementToggle = 1;
-  sunRise: any = "pending";
   sunrise1Milli = 0;
   sunset1Milli = 0;
   public localWeather: any;
@@ -21,15 +20,14 @@ export class WeatherNowComponent extends AppComponent implements OnInit {
   pressure = 0;
   windSpeed: number = 0;
   windDirection = 0;
-  sunrise = 'pending';
-  sunset = 'pending';
+  filler: any;
 
   @Output() outputC = new EventEmitter<boolean>();
   @Output() outputKM = new EventEmitter();
   override isC: boolean = false;
   override isKm: boolean = false;
 
-  constructor(private getWeather: WeatherDataService) {
+  constructor(public getWeather: WeatherDataService) {
     super();
   }
 
@@ -40,10 +38,8 @@ export class WeatherNowComponent extends AppComponent implements OnInit {
   }
 
     getDayData() {
-    this.getWeather.getSunriseSunsetToday().subscribe((data: any) => {
+    this.getWeather.getSunriseSunsetToday(this.filler).subscribe((data: any) => {
       this.dayData = data;
-      this.sunrise = data.results.civil_twilight_begin;
-      this.sunset = data.results.civil_twilight_end;
     });
   }
 

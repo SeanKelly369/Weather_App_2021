@@ -17,24 +17,25 @@ export class WindDirectionsParentComponent implements OnInit {
   public sunriseSunsetPlus3: any;
   public sunriseSunsetPlus4: any;
   public sunriseSunsetPlus5: any;
+  filler: any;
 
   getSunriseSunset() {
-    this.getWeather.getSunriseSunsetToday().subscribe((data: any) => {
+    this.getWeather.getSunriseSunsetToday(this.filler).subscribe((data: any) => {
       this.sunriseSunsetToday = data;
     });
-    this.getWeather.getSunriseSunsetTomorrow().subscribe((data1: any) => {
+    this.getWeather.getSunriseSunsetTomorrow(this.filler).subscribe((data1: any) => {
       this.sunriseSunsetTomorrow = data1;
     });
-    this.getWeather.getSunriseSunsetToday().subscribe((data2: any) => {
+    this.getWeather.getSunriseSunsetToday(this.filler).subscribe((data2: any) => {
       this.sunriseSunsetPlus2 = data2;
     });
-    this.getWeather.getSunriseSunsetToday().subscribe((data3: any) => {
+    this.getWeather.getSunriseSunsetToday(this.filler).subscribe((data3: any) => {
       this.sunriseSunsetPlus3 = data3;
     });
-    this.getWeather.getSunriseSunsetToday().subscribe((data4: any) => {
+    this.getWeather.getSunriseSunsetToday(this.filler).subscribe((data4: any) => {
       this.sunriseSunsetPlus4 = data4;
     });
-    this.getWeather.getSunriseSunsetToday().subscribe((data5: any) => {
+    this.getWeather.getSunriseSunsetToday(this.filler).subscribe((data5: any) => {
       this.sunriseSunsetPlus5 = data5;
     });
   }
