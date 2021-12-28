@@ -32,12 +32,10 @@ export class WeatherDataService {
 
   constructor(private http: HttpClient) { }
 
-  public initialize() {
-    this.getPosition().subscribe( (pos: any) => {
-      console.log(pos);
-      
-      this.lat = pos.loc.split(',')[0];
-      this.lon = pos.loc.split(',')[1];
+  public async initialize() {
+    await this.getPosition().then(pos => {
+      this.lat = pos.lat;
+      this.lon = pos.lon;
 
       const currentTime = new Date();
       const currentTimeFormatted = currentTime.getFullYear() + '-' + (currentTime.getMonth()+ 1) + '-' + currentTime.getDate();
@@ -76,10 +74,17 @@ export class WeatherDataService {
     });
   }
 
-  public getPosition(): any {
-      let temp: any = this.http.get('https://ipinfo.io/geo', {headers: this.setSunriseSunsetApiHeaders()});
-      return temp;
-      
+  public getPosition(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resp => {
+        resolve({ lon: resp.coords.longitude,
+          lat: resp.coords.latitude,
+        });
+      },
+        err => {
+          reject(err);
+        });
+    }); 
   }
 
   public getForeCast() {
