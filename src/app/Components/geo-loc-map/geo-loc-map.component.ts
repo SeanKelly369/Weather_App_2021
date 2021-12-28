@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, HostListener } from '@angular/core';
+import { Component, AfterViewInit, HostListener, OnInit } from '@angular/core';
 import * as d3 from 'd3';
 import * as t from 'topojson';
 import { Countries } from './countries';
@@ -18,11 +18,22 @@ export class GeoLocMapComponent implements AfterViewInit {
   zoomValue: any = 1;
   event!: MouseEvent;
 
+  svg: any;
+  g: any;
+
   public ngAfterViewInit() {
     this.createMap();
   }
 
   getZoomValue(event: MouseEvent): void {
+
+    d3.json('../../../assets/world-110m2.json').then( (topology: any) => {
+
+    })
+
+    let wrapper = document.getElementById('wrapper');
+    console.log(wrapper)
+
     const regexMatch = /[0-9]/g;
     const path = event.composedPath()[3] as HTMLInputElement;
     const worldMapPath = path.childNodes[0].childNodes[0] as SVGAElement;
@@ -81,6 +92,7 @@ export class GeoLocMapComponent implements AfterViewInit {
 
 
   createMap() {
+    console.log('running')
 
       const country2: any[] = new Countries().countries;
       const countryCities: any[] = new Countries().countryCities;
