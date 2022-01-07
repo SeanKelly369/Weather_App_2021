@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { EMPTY } from 'rxjs';
+import { EMPTY, map } from 'rxjs';
 
 
 @Injectable()
@@ -70,6 +70,7 @@ export class WeatherDataService {
       this.getSunriseSunsetDay5(plus5DaysFormatted).subscribe( (response: JSON) => {
         this.sunriseSunsetPlusFive = response;
       });
+      
     });
   }
 
@@ -83,7 +84,7 @@ export class WeatherDataService {
         err => {
           reject(err);
         });
-    });
+    }); 
   }
 
   public getForeCast() {
