@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { EMPTY, map } from 'rxjs';
+import { EMPTY } from 'rxjs';
 
 
 @Injectable()
 export class WeatherDataService {
 
-  private appID = '616711bbee79313325570ae3515e5b71';
+  private appID: string = '616711bbee79313325570ae3515e5b71';
   private lat: number = 0;
   private lon: number = 0;
   private url: any = '';
-  public country = '';
   public tempType: string = '';
   public isC: boolean = false;
 
@@ -29,6 +28,12 @@ export class WeatherDataService {
   sunriseSunsetPlusThree: any;
   sunriseSunsetPlusFour: any;
   sunriseSunsetPlusFive: any;
+
+  public isCLocal: boolean = false;
+  public temp: number = 273.48;
+  public locality: string = 'Dublin';
+  public country: string = 'Ireland';
+  public currentTime = Date.now();
 
   constructor(private http: HttpClient) { }
 

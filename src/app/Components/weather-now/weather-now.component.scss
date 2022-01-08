@@ -7,7 +7,7 @@ $color-black-translucent: rgba(0, 0, 0, 0.34);
 #KMtoMToggle,
 #CtoFToggle {
     z-index: 12;
-    font-size: 2rem;
+    font-size: 1.4rem;
     color: white;
     border: none;
     border-radius: 1px;
@@ -57,9 +57,9 @@ $color-black-translucent: rgba(0, 0, 0, 0.34);
     display: inline-block;
     width: 0px;
     height: 180px;
-    border-right: 1px solid white;
     border-left: 2px solid white;
-    margin-left: 1rem;
+    margin-left: 2rem;
+    transform: translateX(-2rem);
 }
 
 .grid-container {
@@ -72,7 +72,7 @@ $color-black-translucent: rgba(0, 0, 0, 0.34);
 .grid-container>div {
     text-align: left;
     padding-left: 1rem;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
 }
 
 .rightColumn {

@@ -1,5 +1,6 @@
-import { Component, AfterViewInit, HostListener, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import * as d3 from 'd3';
+import { selectAll } from 'd3';
 import * as feature from 'topojson';
 import { Countries } from './countries';
 
@@ -20,71 +21,84 @@ export class GeoLocMapComponent implements OnInit, OnChanges {
 
   svg: any;
   paths: any;
+  child: any;
   g: any;
+  width: number = 620;
+  height: number = 400;
 
   public ngOnInit() {
     this.createMap();
   }
 
   public ngOnChanges() {
-    // this.paths.call(this.zoom);
+    this.paths.call(this.zoom);
 
   }
 
   createMap() {
-    console.log('running')
 
       const country2: any[] = new Countries().countries;
       const countryCities: any[] = new Countries().countryCities;
 
       let country = '';
-      const width = 620;
-      const height = 396;
-
-      this.svg = d3.select('#wrapper');
       
       const projection = d3.geoMercator()
-        .translate([ width / 2, height / 2])
+        .translate([ this.width / 2, this.height / 2])
         .scale(100);
 
       d3.json('../../assets/world.topojson')
       .then((topology: any) => {
-        
-        let pathGenerator = d3.geoPath().projection(projection);
+        const pathGenerator = d3.geoPath().projection(projection);
         const { countries } = topology.objects;
         this.mapFeatures = feature.feature(topology, countries);
-        let countriesGeometry = this.mapFeatures.features;
+        const countriesGeometry = this.mapFeatures.features;
 
-        this.paths = d3.select('#wrapper')
+        this.svg = d3.select('#wrapper').attr('transformX', this.width/2)
+        .attr('right', '300px');
+
+        this.svg
         .append('svg')
         .attr('width', '100%')
-        .attr('height', '396px')
+        .attr('height', this.height)
         .attr('position', 'relative')
-          .selectAll('path')
-          .data(countriesGeometry)
+        .append('g')
+        .attr('position', 'relative')
+        // .attr('x', '-200')
+        .attr('transform', `translate(${this.width / 2}, 0)`)
+        .selectAll('path')
+        .data(countriesGeometry)
         .enter()
         .append('path')
         .attr('class', 'country')
+        .attr('margin', 'auto')
+
         .attr('d', ( d: any) => pathGenerator(d))
         .attr('stroke', '#171c20')
         .attr('cursor', 'pointer')
         .attr('stroke-width', '0.1')
         .attr('fill', 'white')
-        .on('mouseover', (d) => {
-          d.target.style.fill = 'red';
+        .on('mouseover', (d: any) => {
+          d.target.style.fill = '#f1f1f1';
         })
-        .on('mouseout', (d) => {
+        .on('mouseout', (d: any) => {
           d.target.style.fill = 'white';
         })
-        this.paths.call(this.zoom);
+        .on('click', (d: any) => {
+          console.log(d);
+          console.log(d.target.__data__.properties.name);
+          console.log(d.target.__data__.id);
+        });
+
+        this.svg.call(this.zoom);
       });
   }
 
   zoom = d3.zoom()
     .scaleExtent([1, 40])
+    .translateExtent([[0, -80],[this.width, this.height]])
     .on('zoom', (event) => {
-      console.log(event);
-      
-      this.paths.selectAll('g').attr('transform', event.transform.k)
+
+      this.svg.selectAll('g')
+      .attr('transform', event.transform)
     });
 }
