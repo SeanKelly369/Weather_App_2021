@@ -1,0 +1,29 @@
+export interface WeatherLocalDetails {
+  temperatureNow: number;
+  temperaturePlus3: number;
+  temperaturePlus9: number;
+  temperaturePlus15: number;
+  temperaturePlus1Day: number;
+  temperaturePlus2Day: number;
+  temperaturePlus3Day: number;
+  temperaturePlus4Day: number;
+  temperaturePlus5Day: number;
+  location: string;
+  country: string;
+  humidity: string;
+  airPressure: number;
+  windDirection: number;
+  sunriseToday?: string;
+  sunsetToday?: string;
+  sunriseTomorrow?: string;
+  sunsetTomorrow?: string;
+  sunrisePlus2Days?: string;
+  sunsetPlus2Days?: string;
+  sunrisePlus3Days?: string;
+  sunsetPlus3Days?: string;
+  sunrisePlus4Days?: string;
+  sunsetPlus4Days?: string;
+  sunrisePlus5Days?: string;
+  sunsetPlus5Days?: string;
+  nightOrDay: string;
+}

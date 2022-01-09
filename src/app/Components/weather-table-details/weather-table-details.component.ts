@@ -75,9 +75,9 @@ export class WeatherTableDetailsComponent implements OnInit {
 
   constructor(public getWeather: WeatherDataService) {}
 
-  async ngOnInit() {
+  ngOnInit() {
 
-    await this.getWeather.initialize();
+    this.getWeather.initialize();
     this.getData();
     this.currentTime =  Date.now();
 
@@ -97,13 +97,13 @@ export class WeatherTableDetailsComponent implements OnInit {
   getData() {
     this.getWeather.getForeCast().subscribe((data: any) => {
       this.weather = data;
-      this.temp3hr = this.weather.list[1].main.temp - 273.15;
-      this.temp9hr = this.weather.list[3].main.temp - 273.15;
-      this.temp15hr = this.weather.list[5].main.temp - 273.15;
-      this.temp1day = this.weather.list[7].main.temp - 273.15;
-      this.temp2day = this.weather.list[15].main.temp - 273.15;
-      this.temp3day = this.weather.list[23].main.temp - 273.15;
-      this.temp4day = this.weather.list[31].main.temp - 273.15;
+      this.temp3hr = this.weather.list[1].main.temp - 273.48;
+      this.temp9hr = this.weather.list[3].main.temp - 273.48;
+      this.temp15hr = this.weather.list[5].main.temp - 273.48;
+      this.temp1day = this.weather.list[7].main.temp - 273.48;
+      this.temp2day = this.weather.list[15].main.temp - 273.48;
+      this.temp3day = this.weather.list[23].main.temp - 273.48;
+      this.temp4day = this.weather.list[31].main.temp - 273.48;
 
       this.airPressure3hr = this.weather.list[1].main.pressure;
       this.airPressure9hr = this.weather.list[3].main.pressure;

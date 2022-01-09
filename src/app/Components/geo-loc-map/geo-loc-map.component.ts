@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
 import * as feature from 'topojson';
 import { Countries } from './countries';
+import { WeatherDataService } from '../../Services/weather-data.service';
 
 @Component({
   selector: 'app-geo-loc-map',
@@ -19,6 +20,10 @@ export class GeoLocMapComponent implements OnInit {
   width: number = 620;
   height: number = 400;
   countryCoords: any = [];
+
+  constructor(public getWeather: WeatherDataService) {
+
+  }
 
   public ngOnInit() {
     this.createMap();
@@ -120,6 +125,11 @@ export class GeoLocMapComponent implements OnInit {
                 if(countryLocation === element.city) {
                   let queryCoordinates = element.coords; // TODO make http get request
                   console.log(queryCoordinates);
+                  this.getWeather.latitude = queryCoordinates.lat;
+                  this.getWeather.latitude = queryCoordinates.lon;
+
+                  this.getWeather.getForeCastNew(queryCoordinates.lat, queryCoordinates.lon);
+                  this.getWeather.getLocationNameNew(queryCoordinates.lat, queryCoordinates.lon);
                 }
               });
             }))

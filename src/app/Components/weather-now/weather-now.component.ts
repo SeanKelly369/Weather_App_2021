@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { WeatherDataService } from '../../Services/weather-data.service';
 import { AppComponent } from '../../app.component';
 
@@ -22,17 +22,14 @@ export class WeatherNowComponent extends AppComponent implements OnInit {
   windDirection = 0;
   filler: any;
 
-  @Output() outputC = new EventEmitter<boolean>();
-  @Output() outputKM = new EventEmitter();
-  override isC: boolean = false;
   override isKm: boolean = false;
 
   constructor(public getWeather: WeatherDataService) {
     super();
   }
 
-  override async ngOnInit() {
-    await this.getWeather.initialize();
+  override ngOnInit() {
+    this.getWeather.initialize();
     this.getLocationDetail();
     this.getDayData();
   }
@@ -45,6 +42,7 @@ export class WeatherNowComponent extends AppComponent implements OnInit {
 
     getLocationDetail() {
     this.getWeather.getLocationName().subscribe((data: any) => {
+      console.log(data);
       this.localWeather = data;
       this.humidity = this.localWeather.main.humidity;
       this.pressure = this.localWeather.main.pressure;
@@ -54,17 +52,15 @@ export class WeatherNowComponent extends AppComponent implements OnInit {
   }
 
 
-  ToggleWeatherMeasurement(isC: boolean) {
+  ToggleWeatherMeasurement() {
     this.tempToggle++;
-    this.tempToggle % 2 === 0 ? this.isC = true : this.isC = false;
-    this.outputC.emit(this.isC);
+    this.tempToggle % 2 === 0 ? this.getWeather.isC = true : this.getWeather.isC = false;
   }
 
 
-  ToggleDistanceMeasurement(isKm: boolean) {
+  ToggleDistanceMeasurement() {
     this.speedMeasurementToggle++;
-    this.speedMeasurementToggle % 2 === 0 ? this.isKm = true : this.isKm = false;
-    this.outputKM.emit(this.isKm);
+    this.speedMeasurementToggle % 2 === 0 ? this.getWeather.isKm = false : this.getWeather.isKm = true;
   }
 
 }

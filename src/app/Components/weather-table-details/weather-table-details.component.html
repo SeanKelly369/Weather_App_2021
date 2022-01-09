@@ -1,6 +1,6 @@
 <div id="table_container">
   <div id="table-grid">
-      <div class="description">Time</div>
+      <div class="description">Local Time</div>
       <div>{{currentTime + (3600000*3) | date : 'shortTime'}}</div>
       <div class="show-or-not3">{{currentTime + (3600000*9) | date: 'shortTime'}}</div>
       <div>{{currentTime + (3600000*15) | date: 'shortTime'}}</div>
@@ -38,73 +38,73 @@
 
       <div class="description">Temperature</div>
       <div>
-          <span *ngIf="!this.isC">
-                {{temp3hr | number: '1.0-0'}}°C
+          <span *ngIf="!this.getWeather.isC">
+                {{this.getWeather.weatherLocalDetails.temperaturePlus3 | number: '1.0-0'}}°C
             </span>
-          <span *ngIf="this.isC">
-                {{ temp3hr * (9/5) + 32 | number: '1.0-0'}}°F
+          <span *ngIf="this.getWeather.isC">
+                {{ this.getWeather.weatherLocalDetails.temperaturePlus3 * (9/5) + 32 | number: '1.0-0'}}°F
             </span>
       </div>
 
       <div class="show-or-not3">
-          <span *ngIf="!this.isC">
+          <span *ngIf="!this.getWeather.isC">
                 {{temp9hr | number: '1.0-0'}}°C
             </span>
-          <span *ngIf="this.isC">
+          <span *ngIf="this.getWeather.isC">
                 {{ temp9hr * (9/5) + 32 | number: '1.0-0'}}°F
             </span>
       </div>
 
       <div>
-          <span *ngIf="!this.isC">
+          <span *ngIf="!this.getWeather.isC">
                 {{temp15hr | number: '1.0-0'}}°C
             </span>
-          <span *ngIf="this.isC">
+          <span *ngIf="this.getWeather.isC">
                 {{ temp15hr * (9/5) + 32 | number: '1.0-0'}}°F
             </span>
       </div>
 
       <div>
-          <span *ngIf="!this.isC">
+          <span *ngIf="!this.getWeather.isC">
                 {{temp1day | number: '1.0-0'}}°C
             </span>
-          <span *ngIf="this.isC">
+          <span *ngIf="this.getWeather.isC">
                 {{ temp1day * (9/5) + 32 | number: '1.0-0'}}°F
             </span>
       </div>
 
       <div>
-          <span *ngIf="!this.isC">
+          <span *ngIf="!this.getWeather.isC">
                 {{temp2day | number: '1.0-0'}}°C
             </span>
-          <span *ngIf="this.isC">
+          <span *ngIf="this.getWeather.isC">
                 {{ temp2day * (9/5) + 32 | number: '1.0-0'}}°F
             </span>
       </div>
 
       <div>
-          <span *ngIf="!this.isC">
+          <span *ngIf="!this.getWeather.isC">
                 {{temp3day | number: '1.0-0'}}°C
             </span>
-          <span *ngIf="this.isC">
+          <span *ngIf="this.getWeather.isC">
                 {{ temp3day * (9/5) + 32 | number: '1.0-0'}}°F
             </span>
       </div>
 
       <div class="show-or-not2">
-          <span *ngIf="!this.isC">
+          <span *ngIf="!this.getWeather.isC">
                 {{temp4day | number: '1.0-0'}}°C
             </span>
-          <span *ngIf="this.isC">
+          <span *ngIf="this.getWeather.isC">
                 {{ temp4day * (9/5) + 32 | number: '1.0-0'}}°F
             </span>
       </div>
 
       <div class="show-or-not">
-          <span *ngIf="!this.isC">
+          <span *ngIf="!this.getWeather.isC">
                 {{temp5day | number: '1.0-0'}}°C
             </span>
-          <span *ngIf="this.isC">
+          <span *ngIf="this.getWeather.isC">
                 {{ temp5day * (9/5) + 32 | number: '1.0-0'}}°F
             </span>
       </div>
@@ -139,66 +139,66 @@
 
       <div class="description">Wind Speed</div>
       <div>
-          <span *ngIf="this.isKm">
+          <span *ngIf="this.getWeather.isKm">
                 {{windSpeed3hr}} km/h
             </span>
-          <span *ngIf="!this.isKm">
+          <span *ngIf="!this.getWeather.isKm">
                 {{ (windSpeed3hr * 0.621371) | number: '1.2-2'}} m/h
             </span>
       </div>
       <div class="show-or-not3">
-          <span *ngIf="this.isKm">
+          <span *ngIf="this.getWeather.isKm">
                 {{windSpeed9hr}} km/h
             </span>
-          <span *ngIf="!this.isKm">
+          <span *ngIf="!this.getWeather.isKm">
                 {{ (windSpeed9hr * 0.621371) | number: '1.2-2'}} m/h
             </span>
       </div>
       <div>
-          <span *ngIf="this.isKm">
+          <span *ngIf="this.getWeather.isKm">
                 {{windSpeed15hr}} km/h
             </span>
-          <span *ngIf="!this.isKm">
+          <span *ngIf="!this.getWeather.isKm">
                 {{ (windSpeed15hr * 0.621371) | number: '1.2-2'}} m/h
             </span>
       </div >
       <div>
-          <span *ngIf="this.isKm">
+          <span *ngIf="this.getWeather.isKm">
                 {{windSpeed1day}} km/h
             </span>
-          <span *ngIf="!this.isKm">
+          <span *ngIf="!this.getWeather.isKm">
                 {{ (windSpeed1day * 0.621371) | number: '1.2-2'}} m/h
             </span>
       </div>
       <div>
-          <span *ngIf="this.isKm">
+          <span *ngIf="this.getWeather.isKm">
                 {{windSpeed2day}} km/h
             </span>
-          <span *ngIf="!this.isKm">
+          <span *ngIf="!this.getWeather.isKm">
                 {{ (windSpeed2day * 0.621371) | number: '1.2-2'}} m/h
             </span>
       </div>
       <div>
-          <span *ngIf="this.isKm">
+          <span *ngIf="this.getWeather.isKm">
                 {{windSpeed3day}} km/h
             </span>
-          <span *ngIf="!this.isKm">
+          <span *ngIf="!this.getWeather.isKm">
                 {{ (windSpeed3day * 0.621371) | number: '1.2-2'}} m/h
             </span>
       </div>
       <div class="show-or-not2">
-          <span *ngIf="this.isKm">
+          <span *ngIf="this.getWeather.isKm">
                 {{windSpeed4day}} km/h
             </span>
-          <span *ngIf="!this.isKm">
+          <span *ngIf="!this.getWeather.isKm">
                 {{ (windSpeed4day * 0.621371) | number: '1.2-2'}} m/h
             </span>
       </div>
       <div class="show-or-not">
-          <span *ngIf="this.isKm">
+          <span *ngIf="this.getWeather.isKm">
                 {{windSpeed5day}} km/h
             </span>
-          <span *ngIf="!this.isKm">
+          <span *ngIf="!this.getWeather.isKm">
                 {{ (windSpeed5day * 0.621371) | number: '1.2-2'}} m/h
             </span>
       </div>

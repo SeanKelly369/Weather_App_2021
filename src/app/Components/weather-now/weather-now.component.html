@@ -4,18 +4,18 @@
       <div id="button-grid">
           <div></div>
           <div>
-              <button id="CtoFToggle" (click)="ToggleWeatherMeasurement(isC)" class="btn btn-primary">
-                <span *ngIf="!isC">C°</span>
-                <span *ngIf="isC">F°</span>
+              <button id="CtoFToggle" (click)="ToggleWeatherMeasurement()" class="btn btn-primary">
+                <span *ngIf="!getWeather.isC">C°</span>
+                <span *ngIf="getWeather.isC">F°</span>
   
               </button>
           </div>
           <div></div>
           <div>
   
-              <button class="btn btn-primary" id="KMtoMToggle" (click)="ToggleDistanceMeasurement(isKm)">
-                  <span *ngIf="isKm">km/hr</span>
-                  <span *ngIf="!isKm">m/hr</span>
+              <button class="btn btn-primary" id="KMtoMToggle" (click)="ToggleDistanceMeasurement()">
+                  <span *ngIf="this.getWeather.isKm">km/hr</span>
+                  <span *ngIf="!this.getWeather.isKm">m/hr</span>
               </button>
           </div>
           <div></div>
@@ -57,10 +57,10 @@
                   <div class="v-separator"></div>
               </div>
               <div class='rightColumn'>
-                <span *ngIf="isKm">
+                <span *ngIf="this.getWeather.isKm">
                   {{this.windSpeed}} km/h
                 </span>
-                <span *ngIf="!isKm">
+                <span *ngIf="!this.getWeather.isKm">
                   {{ (this.windSpeed * 0.621371) | number: '1.2-2'}} m/h
                 </span>
               </div>

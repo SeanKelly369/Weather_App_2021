@@ -15,18 +15,18 @@
         <div></div>
         <div id="current_temp">
             <span id=temp_span *ngIf="!isCLocal">
-              {{this.temp -273.48 | number:'1.0-0'}}°C
+              {{ this.getWeather.weatherLocalDetails.temperatureNow | number:'1.0-0'}}°C
           </span>
             <span id=temp_span *ngIf="isCLocal">
-              {{ (this.temp -273.48) * (9/5) + 32 | number: '1.0-0'}}°F
+              {{ (this.getWeather.weatherLocalDetails.temperatureNow) * (9/5) + 32 | number: '1.0-0'}}°F
           </span>
         </div>
         <div></div>
         <div id="location">
-            {{this.locality}}
+            {{this.getWeather.weatherLocalDetails.location}}
         </div>
         <div id="nation">
-            {{this.country}}
+            {{this.getWeather.weatherLocalDetails.country}}
         </div>
   
         <div id="currentTime">{{this.currentTime | date: 'dd/MM/yyyy'}}</div>
