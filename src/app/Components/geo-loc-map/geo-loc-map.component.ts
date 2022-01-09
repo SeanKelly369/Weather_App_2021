@@ -119,6 +119,7 @@ export class GeoLocMapComponent implements OnInit {
               this.countryCoords.forEach( (element: any) => {
                 if(countryLocation === element.city) {
                   let queryCoordinates = element.coords; // TODO make http get request
+                  console.log(queryCoordinates);
                 }
               });
             }))
