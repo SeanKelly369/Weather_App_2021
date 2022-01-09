@@ -29,6 +29,7 @@ import { WeatherTableSwitchNineHrsComponent } from './Components/weather-table-d
 import { WeatherTableSwitchNowComponent } from './Components/weather-table-details/weather-switch-days/weather-table-switch-now/weather-table-switch-now.component';
 import { WeatherTableSwitchThreeHrsComponent } from './Components/weather-table-details/weather-switch-days/weather-table-switch-three-hrs/weather-table-switch-three-hrs.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NavbarComponent } from './Components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { HttpClientModule } from '@angular/common/http';
     WeatherTableSwitchFifteenHrsComponent,
     WeatherTableSwitchNineHrsComponent,
     WeatherTableSwitchNowComponent,
-    WeatherTableSwitchThreeHrsComponent
+    WeatherTableSwitchThreeHrsComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

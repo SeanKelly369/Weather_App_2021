@@ -1,0 +1,37 @@
+<ul>
+    <li>
+        <span id="main_weather_icon">
+            <app-weather-table-switch-now>
+
+            </app-weather-table-switch-now>
+          </span>
+    </li>
+    <li>
+        <p>
+            <span *ngIf="!this.weatherDataService.isCLocal">
+                {{this.weatherDataService.temp -273.48 | number:'1.0-0'}}°C
+            </span>    
+            <span style='margin-left: .5rem;' *ngIf="!this.weatherDataService.isCLocal">
+                {{ (this.weatherDataService.temp -273.48) * (9/5) + 32 | number: '1.0-0'}}°F
+            </span>
+        </p>
+    </li>
+    <li style='float: right;'>
+        <p>
+            <span>
+                {{this.weatherDataService.currentTime | date: 'dd/MM/yyyy'}}
+            </span>
+        </p>
+    </li>
+    <li style='float: right;'>
+        <p>
+            <span>
+                {{this.weatherDataService.locality}},
+            </span>
+            <span>
+                {{this.weatherDataService.country}}
+            </span>
+        </p>
+    </li>
+
+</ul>

@@ -4,7 +4,9 @@ import { WeatherDataService } from '../../../../Services/weather-data.service';
 
 @Component({
   selector: 'app-weather-table-switch-now',
-  templateUrl: './weather-table-switch-now.component.html'
+  templateUrl: './weather-table-switch-now.component.html',
+  styleUrls: ['./weather-table-switch-now.component.scss']
+
 })
 export class WeatherTableSwitchNowComponent extends WeatherTableDetailsComponent implements OnInit {
 
@@ -16,8 +18,9 @@ export class WeatherTableSwitchNowComponent extends WeatherTableDetailsComponent
   }
 
   getDayLen() {
-    this.getWeather.getForeCast().subscribe((data: any) => {
+    this.getWeather.getForeCast().subscribe((data: JSON) => {
       this.now = data;
+      console.log(this.now);
       this.nightOrDay = this.now.list[0].sys.pod;
     });
   }
