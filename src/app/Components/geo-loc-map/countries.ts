@@ -182,7 +182,7 @@ export class Countries {
     { id: 199, name: 'Somaliland'},
     { id: 58, name: 'Djibouti'},
     { id: 68, name: 'Ethiopia'},
-    { id: 706, name: 'Somalia'},
+    { id: 200, name: 'Somalia'},
     { id: 115, name: 'Kenya'},
     { id: 225, name: 'Uganda'},
     { id: 186, name: 'Rwanda'},
@@ -1292,24 +1292,28 @@ export class Countries {
       ]
     },
     { country: 'Guinea Bissau',
+      id: 83,
       cities: [
         { city: 'Bissau', coords: { lat: 11.863185, lon: -15.580875 } }
       ]
     },
     { country: 'Sierra Leone',
+      id: 196,
       cities: [
         { city: 'Freetown', coords: { lat: 8.480386, lon: -13.266997 } }
       ]
     },
     { country: 'Liberia',
+      id: 125,
       cities: [
         { city: 'Monrovia', coords: { lat: 6.337342, lon: -10.790314 } }
       ]
     },
       { country: 'Ivory Coast',
-      cities: [
-        { city: 'Monrovia', coords: { lat: 6.337342, lon: -10.790314 } }
-      ]
+        id: 42,
+        cities: [
+          { city: 'Monrovia', coords: { lat: 6.337342, lon: -10.790314 } }
+        ]
     },
     { country: 'Burkina Faso',
       cities: [
@@ -1317,11 +1321,13 @@ export class Countries {
       ]
     },
     { country: 'Ghana',
+      id: 80,
       cities: [
         { city: 'Monrovia', coords: { lat: 6.337342, lon: -10.790314 } }
       ]
     },
     { country: 'Togo',
+      id: 214,
       cities: [
         { city: 'Lome', coords: { lat: 6.152161, lon: 1.224838 } }
       ]
@@ -1332,44 +1338,52 @@ export class Countries {
       ]
     },
     { country: 'Nigeria',
+      id: 160,
       cities: [
         { city: 'Lagos', coords: { lat: 6.501991, lon: 3.377860 } },
         { city: 'Kano', coords: { lat: 11.995465, lon: 8.533235 } }
       ]
     },
     { country: 'Cameroon',
+      id: 43,
       cities: [
         { city: 'Yaounde', coords: { lat: 3.872287, lon: 11.523550 } }
       ]
     },
     { country: 'Equatorial Guinea',
+      id: 84,
       cities: [
         { city: 'Bata', coords: { lat: 1.850463, lon: 9.775076 } }
       ]
     },
     { country: 'Gabon',
+      id: 76,
       cities: [
         { city: 'Libreville', coords: { lat: 0.385343, lon: 9.458182 } }
       ]
     },
     { country: 'Republic of Congo',
+      id: 45,
       cities: [
         { city: 'Pointe-Noire', coords: { lat: -4.787206, lon: 11.857202 } },
         { city: 'Brazzaville', coords: { lat: -4.267259, lon: 15.268565 } }
       ]
     },
     { country: 'Central African Republic',
+      id: 37,
       cities: [
         { city: 'Bambari', coords: { lat: 5.764971, lon: 20.671543 } }
       ]
     },
     { country: 'Democratic Republic of the Congo',
+      id: 44,
       cities: [
         { city: 'Mbuji-Mayi', coords: { lat: -6.117206, lon: 23.581008 } },
         { city: 'Kalemie', coords: { lat: -5.932836, lon: 29.186891 } }
       ]
     },
     { country: 'South Sudan',
+      id: 190,
       cities: [
         { city: 'Omdurman', coords: { lat: 15.598700, lon: 32.534253 } },
         { city: 'Al Fashir', coords: { lat: 13.631573, lon: 25.361206 } },
@@ -1378,29 +1392,34 @@ export class Countries {
       ]
     },
     { country: 'Eritrea',
+      id: 65,
       cities: [
         { city: 'Keren', coords: { lat: 15.778708, lon: 38.452909 } },
         { city: 'Assab', coords: { lat: 13.012051, lon: 42.741108 } }
       ]
     },
     { country: 'Djibouti',
+      id: 58,
       cities: [
         { city: 'Djibouti', coords: { lat: 11.584979, lon: 43.136002 } },
         { city: 'Dikhil', coords: { lat: 11.107630, lon: 42.369970 } }
       ]
     },
     { country: 'Ethiopia',
+      id: 68,
       cities: [
         { city: 'Dire Dawa', coords: { lat: 9.597500, lon: 41.859608 } },
         { city: 'Arba Minch', coords: { lat: 6.023936, lon: 37.548704 } }
       ]
     },
     { country: 'Somalia',
+      id: 200,
       cities: [
         { city: 'Mogadishu', coords: { lat: 2.044122, lon: 45.321451 } }
       ]
     },
     { country: 'Kenya',
+      id: 115,
       cities: [
         { city: 'Nairobi', coords: { lat: -1.285842, lon: 36.829966 } },
         { city: 'Mombasa', coords: { lat: -4.044549, lon: 39.655757 } }
@@ -1408,30 +1427,33 @@ export class Countries {
       ]
     },
     { country: 'Uganda',
-    cities: [
-      { city: 'Kampala', coords: { lat: 0.308714, lon: 32.600249 } }
-
-      ]
+      id: 225,
+      cities: [
+        { city: 'Kampala', coords: { lat: 0.308714, lon: 32.600249 } }
+        ]
     },
     { country: 'Rwanda',
-    cities: [
-      { city: 'Huye', coords: { lat: -2.600669, lon: 29.747401 } }
-
-      ]
+      id: 186,
+      cities: [
+        { city: 'Huye', coords: { lat: -2.600669, lon: 29.747401 } }
+        ]
     },
     { country: 'Burundi',
+      id: 18,
       cities: [
         { city: 'Bujumbura', coords: { lat: -3.367292, lon: 29.367818 } }
       ]
     },
 
     { country: 'Tanzania',
+      id: 224,
       cities: [
         { city: 'Arusha', coords: { lat: -3.367566, lon: 36.686096 } },
         { city: 'Dar es Salaam', coords: { lat: -6.832352, lon: 39.276123 } }
       ]
     },
     { country: 'Mozambique',
+      id: 508,
       cities: [
         { city: 'Beira', coords: { lat: -19.823299, lon: 34.845057 } },
         { city: 'Chimoio', coords: { lat: -19.115327, lon: 33.478630 } },
@@ -1439,6 +1461,7 @@ export class Countries {
       ]
     },
     { country: 'Malawi',
+      id: 154,
       cities: [
         { city: 'Lilongwe', coords: { lat: -13.981713, lon: 33.770805 } },
         { city: 'Blantyre', coords: { lat: -15.788421, lon: 35.008484 } },
@@ -1446,24 +1469,28 @@ export class Countries {
       ]
     },
       { country: 'Zambia',
+        id: 240,
       cities: [
         { city: 'Lusaka', coords: { lat: -15.411320, lon: 28.292542 } },
         { city: 'Ndola', coords: { lat: -12.977795, lon: 28.640533 } }
       ]
     },
     { country: 'Angola',
+      id: 2,
       cities: [
         { city: 'Luanda', coords: { lat: -8.829845, lon: 13.243469 } },
         { city: 'Lobito', coords: { lat: -12.369045, lon: 13.554863 } }
       ]
     },
     { country: 'Namibia',
+      id: 156,
       cities: [
         { city: 'Windhoek', coords: { lat: -22.566590, lon: 17.076874 } },
         { city: 'Opuwo', coords: { lat: -18.057416, lon: 13.842087 } }
       ]
     },
     { country: 'South Africa',
+      id: 239,
       cities: [
         { city: 'Cape Town', coords: { lat: -33.932650, lon: 18.500702 } },
         { city: 'Pretoria', coords: { lat: -25.748198, lon: 28.194214 } },
@@ -1472,16 +1499,19 @@ export class Countries {
       ]
     },
     { country: 'Lesotho',
+      id: 130,
       cities: [
         { city: 'Maseru', coords: { lat: -29.311968, lon: 27.479485 } }
       ]
     },
-    { country: 'Etwatini',
+    { country: 'Lesotho',
+      id: 130,
       cities: [
         { city: 'Mbabane', coords: { lat: -26.317760, lon: 31.134808 } }
       ]
     },
     { country: 'Botswana',
+      id: 36,
       cities: [
         { city: 'Gaborone', coords: { lat: -24.659748, lon: 25.907822 } },
         { city: 'Maun', coords: { lat: -19.995095, lon: 23.425873 } },
@@ -1489,32 +1519,37 @@ export class Countries {
       ]
     },
     { country: 'Zimbabwe',
+      id: 241,
       cities: [
         { city: 'Harare', coords: { lat: -17.833943, lon: 31.048050 } },
         { city: 'Bulawayo', coords: { lat: -20.152523, lon: 28.579285 } }
       ]
     },
     { country: 'Madagascar',
-    cities: [
-      { city: 'Toamasina', coords: { lat: -18.175081, lon: 49.399951 } },
-      { city: 'Mahajanga', coords: { lat: -15.768995, lon: 46.354698 } }
+      id: 139,
+      cities: [
+        { city: 'Toamasina', coords: { lat: -18.175081, lon: 49.399951 } },
+        { city: 'Mahajanga', coords: { lat: -15.768995, lon: 46.354698 } }
       ]
     },
 
     { country: 'Falkland Islands / Islas Malvinas',
-    cities: [
-      { city: 'Port Stanley', coords: { lat: -51.689926, lon: -57.777915 } }
+      id: 71,
+      cities: [
+        { city: 'Port Stanley', coords: { lat: -51.689926, lon: -57.777915 } }
       ]
     },
     { country: 'French Southern and Antarctic Lands',
-    cities: [
-      { city: 'Port Aux Francais', coords: { lat: -49.350177, lon: 70.218763 } }
+      id: 13,
+      cities: [
+        { city: 'Port Aux Francais', coords: { lat: -49.350177, lon: 70.218763 } }
       ]
     },
     { country: 'Antarctica',
-    cities: [
-      { city: 'James Ross Island', coords: { lat: -64.232180, lon: 302.289260 } },
-      { city: 'McMurdo Station', coords: { lat: -78.588345, lon: -194.119553 } }
+      id: 11,
+      cities: [
+        { city: 'James Ross Island', coords: { lat: -64.232180, lon: 302.289260 } },
+        { city: 'McMurdo Station', coords: { lat: -78.588345, lon: -194.119553 } }
       ]
     },
 

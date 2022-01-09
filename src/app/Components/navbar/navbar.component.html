@@ -8,11 +8,11 @@
     </li>
     <li>
         <p>
-            <span *ngIf="!this.weatherDataService.isCLocal">
-                {{this.weatherDataService.temp -273.48 | number:'1.0-0'}}°C
+            <span *ngIf="!this.weatherDataService.isC">
+                {{ (this.weatherDataService.weatherLocalDetails.temperatureNow) | number:'1.0-0'}}°C
             </span>    
-            <span style='margin-left: .5rem;' *ngIf="!this.weatherDataService.isCLocal">
-                {{ (this.weatherDataService.temp -273.48) * (9/5) + 32 | number: '1.0-0'}}°F
+            <span style='margin-left: .5rem;' *ngIf="this.weatherDataService.isC">
+                {{ (this.weatherDataService.weatherLocalDetails.temperatureNow) * (9/5) + 32 | number: '1.0-0'}}°F
             </span>
         </p>
     </li>
@@ -26,10 +26,10 @@
     <li style='float: right;'>
         <p>
             <span>
-                {{this.weatherDataService.locality}},
+                {{this.weatherDataService.weatherLocalDetails.location}},
             </span>
             <span>
-                {{this.weatherDataService.country}}
+                {{this.weatherDataService.weatherLocalDetails.country}}
             </span>
         </p>
     </li>

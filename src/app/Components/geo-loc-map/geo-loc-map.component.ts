@@ -1,50 +1,36 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
 import * as feature from 'topojson';
 import { Countries } from './countries';
+import { WeatherDataService } from '../../Services/weather-data.service';
 
 @Component({
   selector: 'app-geo-loc-map',
   templateUrl: './geo-loc-map.component.html',
   styleUrls: ['./geo-loc-map.component.scss']
 })
-export class GeoLocMapComponent implements OnInit, OnChanges {
-  name: string = 'd3';
+export class GeoLocMapComponent implements OnInit {
   mapFeatures: any;
-  airports: any;
-  nodeSelection: any;
   countries: Object[] = new Countries().countries;
   countryCities: Object[] = new Countries().countryCities;
-  scaledInitial = 1;
-  zoomValue: any = 1;
-  event!: MouseEvent;
-  selectedCountry: number = -1;
-  selectedCountyCities: Object = [];
 
   svg: any;
   paths: any;
-  child: any;
   g: any;
   width: number = 620;
   height: number = 400;
   countryCoords: any = [];
 
+  constructor(public getWeather: WeatherDataService) {
+
+  }
+
   public ngOnInit() {
     this.createMap();
   }
 
-  public ngOnChanges() {
-    this.paths.call(this.zoom);
-
-  }
-
   createMap() {
-
-      // const countries: any[] = new Countries().countries;
-      // const countryCities: any[] = new Countries().countryCities;
-
       let coords: any;
-      
       const projection = d3.geoMercator()
         .translate([ this.width / 2, this.height / 2])
         .scale(100);
@@ -57,7 +43,6 @@ export class GeoLocMapComponent implements OnInit, OnChanges {
         const countriesGeometry = this.mapFeatures.features;
 
         this.svg = d3.select('#wrapper')
-
         
         const dynamicWidth = (document.getElementById('mapContainer')?.clientWidth as number) / 4;
         this.svg
@@ -82,21 +67,21 @@ export class GeoLocMapComponent implements OnInit, OnChanges {
         .attr('fill', 'white')
         .on('mouseover', (d: any) => {
           d.target.style.fill = '#e1e1e1';
-
         })
         .on('mouseout', (d: any) => {
-          d.target.style.fill = 'white';
+          if(d.target.style.fill !== 'red') {
+            d.target.style.fill = 'white';
+          }
         })
         .on('click', (event: any, country: any ) => {
-          console.log(country)
+          console.log(event.target.parentElement)
+          d3.selectAll('.country').style('fill', 'white')
           event.target.style.fill = 'red'
 
           this.countryCities.forEach( ( (d:any) => {
-            console.log(d.id);
             if(d.id === country.id) {
               coords = d;
             }
-
           }));
           d3.select('#countryDetails')
           .selectChildren()
@@ -111,7 +96,7 @@ export class GeoLocMapComponent implements OnInit, OnChanges {
           d3.select('#countryDetails')
           .append('hr')
           .attr('background-color', 'white')
-          .attr('color', 'white')
+          .attr('color', 'red')
           .attr('width', '100%')
           .attr('height', '1px');
 
@@ -126,23 +111,30 @@ export class GeoLocMapComponent implements OnInit, OnChanges {
             .style('margin-bottom', '.3rem')
             .style('cursor', 'pointer')
             .text(element.city)
-            .on('click', ((e) => {
-              let countryLocation = e.srcElement.innerText;
+            .on('mouseover', (el: any) => {
+              el.target.style.color = '#eee';
+            })
+            .on('mouseout', (el: any) => {
+              el.target.style.color = 'white';
+            })
+            .on('click', ((el) => {
+              el.target.style.color = 'red';
+              let countryLocation = el.srcElement.innerText;
 
-              console.log(this.countryCoords);
               this.countryCoords.forEach( (element: any) => {
                 if(countryLocation === element.city) {
-                  console.log('match');
-                  let queryCoordinates = element.coords;
+                  let queryCoordinates = element.coords; // TODO make http get request
                   console.log(queryCoordinates);
+                  this.getWeather.latitude = queryCoordinates.lat;
+                  this.getWeather.latitude = queryCoordinates.lon;
+
+                  this.getWeather.getForeCastNew(queryCoordinates.lat, queryCoordinates.lon);
+                  this.getWeather.getLocationNameNew(queryCoordinates.lat, queryCoordinates.lon);
                 }
               });
             }))
-            
           });
-          console.log(this.countryCoords);
         });
-
         this.svg.call(this.zoom);
       });
   }

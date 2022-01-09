@@ -1,6 +1,5 @@
 export interface IWeatherLocal {
-    temperature: number;
-    location: string;
-    country: string;
-  }
-  
+  temperature: number;
+  location: string;
+  country: string;
+}
