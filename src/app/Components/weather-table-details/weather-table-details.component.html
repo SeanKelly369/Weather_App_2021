@@ -39,7 +39,7 @@
       <div class="description">Temperature</div>
       <div>
           <span *ngIf="!this.getWeather.isC">
-                {{this.getWeather.weatherLocalDetails.temperaturePlus3 | number: '1.0-0'}}°C
+                {{ this.getWeather.weatherLocalDetails.temperaturePlus3 | number: '1.0-0'}}°C
             </span>
           <span *ngIf="this.getWeather.isC">
                 {{ this.getWeather.weatherLocalDetails.temperaturePlus3 * (9/5) + 32 | number: '1.0-0'}}°F
@@ -48,184 +48,184 @@
 
       <div class="show-or-not3">
           <span *ngIf="!this.getWeather.isC">
-                {{temp9hr | number: '1.0-0'}}°C
+                {{ this.getWeather.weatherLocalDetails.temperaturePlus9 | number: '1.0-0'}}°C
             </span>
           <span *ngIf="this.getWeather.isC">
-                {{ temp9hr * (9/5) + 32 | number: '1.0-0'}}°F
+                {{ this.getWeather.weatherLocalDetails.temperaturePlus9 * (9/5) + 32 | number: '1.0-0'}}°F
             </span>
       </div>
 
       <div>
           <span *ngIf="!this.getWeather.isC">
-                {{temp15hr | number: '1.0-0'}}°C
+                {{this.getWeather.weatherLocalDetails.temperaturePlus15 | number: '1.0-0'}}°C
             </span>
           <span *ngIf="this.getWeather.isC">
-                {{ temp15hr * (9/5) + 32 | number: '1.0-0'}}°F
+                {{ this.getWeather.weatherLocalDetails.temperaturePlus15 * (9/5) + 32 | number: '1.0-0'}}°F
             </span>
       </div>
 
       <div>
           <span *ngIf="!this.getWeather.isC">
-                {{temp1day | number: '1.0-0'}}°C
+                {{ this.getWeather.weatherLocalDetails.temperaturePlus1Day | number: '1.0-0'}}°C
             </span>
           <span *ngIf="this.getWeather.isC">
-                {{ temp1day * (9/5) + 32 | number: '1.0-0'}}°F
+                {{ this.getWeather.weatherLocalDetails.temperaturePlus1Day * (9/5) + 32 | number: '1.0-0'}}°F
             </span>
       </div>
 
       <div>
           <span *ngIf="!this.getWeather.isC">
-                {{temp2day | number: '1.0-0'}}°C
+                {{ this.getWeather.weatherLocalDetails.temperaturePlus2Day | number: '1.0-0'}}°C
             </span>
           <span *ngIf="this.getWeather.isC">
-                {{ temp2day * (9/5) + 32 | number: '1.0-0'}}°F
+                {{ this.getWeather.weatherLocalDetails.temperaturePlus2Day * (9/5) + 32 | number: '1.0-0'}}°F
             </span>
       </div>
 
       <div>
           <span *ngIf="!this.getWeather.isC">
-                {{temp3day | number: '1.0-0'}}°C
+                {{ this.getWeather.weatherLocalDetails.temperaturePlus3Day | number: '1.0-0'}}°C
             </span>
           <span *ngIf="this.getWeather.isC">
-                {{ temp3day * (9/5) + 32 | number: '1.0-0'}}°F
+                {{ this.getWeather.weatherLocalDetails.temperaturePlus3Day * (9/5) + 32 | number: '1.0-0'}}°F
             </span>
       </div>
 
       <div class="show-or-not2">
           <span *ngIf="!this.getWeather.isC">
-                {{temp4day | number: '1.0-0'}}°C
+                {{ this.getWeather.weatherLocalDetails.temperaturePlus4Day | number: '1.0-0'}}°C
             </span>
           <span *ngIf="this.getWeather.isC">
-                {{ temp4day * (9/5) + 32 | number: '1.0-0'}}°F
+                {{ this.getWeather.weatherLocalDetails.temperaturePlus4Day * (9/5) + 32 | number: '1.0-0'}}°F
             </span>
       </div>
 
       <div class="show-or-not">
           <span *ngIf="!this.getWeather.isC">
-                {{temp5day | number: '1.0-0'}}°C
+                {{ this.getWeather.weatherLocalDetails.temperaturePlus5Day | number: '1.0-0'}}°C
             </span>
           <span *ngIf="this.getWeather.isC">
-                {{ temp5day * (9/5) + 32 | number: '1.0-0'}}°F
+                {{ this.getWeather.weatherLocalDetails.temperaturePlus5Day * (9/5) + 32 | number: '1.0-0'}}°F
             </span>
       </div>
 
       <div class="description table-grid-odd">Air Pressure</div>
 
       <div class="table-grid-odd">
-        {{airPressure3hr}} mb
+        {{ this.getWeather.weatherLocalDetails.humidity3Hrs }} mb
       </div>
       <div class="table-grid-odd show-or-not3">
-        {{airPressure9hr}} mb
+        {{ this.getWeather.weatherLocalDetails.humidity9Hrs }} mb
       </div>
       <div class="table-grid-odd">
-        {{airPressure15hr}} mb
+        {{ this.getWeather.weatherLocalDetails.humidity15Hrs }} mb
       </div>
       <div class="table-grid-odd">
-        {{airPressure1day}} mb
+        {{ this.getWeather.weatherLocalDetails.humidity1Day }} mb
       </div>
       <div class="table-grid-odd">
-        {{airPressure2day}} mb
+        {{ this.getWeather.weatherLocalDetails.humidity2Days }} mb
       </div>
       <div class="table-grid-odd">
-        {{airPressure3day}} mb
+        {{ this.getWeather.weatherLocalDetails.humidity3Days }} mb
       </div>
       <div class="table-grid-odd show-or-not2">
-        {{airPressure4day}} mb
+        {{ this.getWeather.weatherLocalDetails.humidity4Days }} mb
       </div>
       <div class="table-grid-odd show-or-not">
-        {{airPressure5day}} mb
+        {{ this.getWeather.weatherLocalDetails.humidity5Days }} mb
       </div>
 
 
       <div class="description">Wind Speed</div>
       <div>
           <span *ngIf="this.getWeather.isKm">
-                {{windSpeed3hr}} km/h
+                {{ this.getWeather.weatherLocalDetails.humidity3Hrs }} km/h
             </span>
           <span *ngIf="!this.getWeather.isKm">
-                {{ (windSpeed3hr * 0.621371) | number: '1.2-2'}} m/h
+                {{ (this.getWeather.weatherLocalDetails.humidity3Hrs * 0.621371) | number: '1.2-2'}} m/h
             </span>
       </div>
       <div class="show-or-not3">
           <span *ngIf="this.getWeather.isKm">
-                {{windSpeed9hr}} km/h
+                {{this.getWeather.weatherLocalDetails.humidity9Hrs}} km/h
             </span>
           <span *ngIf="!this.getWeather.isKm">
-                {{ (windSpeed9hr * 0.621371) | number: '1.2-2'}} m/h
+                {{ (this.getWeather.weatherLocalDetails.humidity9Hrs * 0.621371) | number: '1.2-2'}} m/h
             </span>
       </div>
       <div>
           <span *ngIf="this.getWeather.isKm">
-                {{windSpeed15hr}} km/h
+                {{this.getWeather.weatherLocalDetails.humidity15Hrs}} km/h
             </span>
           <span *ngIf="!this.getWeather.isKm">
-                {{ (windSpeed15hr * 0.621371) | number: '1.2-2'}} m/h
+                {{ (this.getWeather.weatherLocalDetails.humidity15Hrs * 0.621371) | number: '1.2-2'}} m/h
             </span>
       </div >
       <div>
           <span *ngIf="this.getWeather.isKm">
-                {{windSpeed1day}} km/h
+                {{this.getWeather.weatherLocalDetails.humidity1Day}} km/h
             </span>
           <span *ngIf="!this.getWeather.isKm">
-                {{ (windSpeed1day * 0.621371) | number: '1.2-2'}} m/h
+                {{ (this.getWeather.weatherLocalDetails.humidity1Day * 0.621371) | number: '1.2-2'}} m/h
             </span>
       </div>
       <div>
           <span *ngIf="this.getWeather.isKm">
-                {{windSpeed2day}} km/h
+                {{this.getWeather.weatherLocalDetails.humidity2Days}} km/h
             </span>
           <span *ngIf="!this.getWeather.isKm">
-                {{ (windSpeed2day * 0.621371) | number: '1.2-2'}} m/h
+                {{ (this.getWeather.weatherLocalDetails.humidity2Days * 0.621371) | number: '1.2-2'}} m/h
             </span>
       </div>
       <div>
           <span *ngIf="this.getWeather.isKm">
-                {{windSpeed3day}} km/h
+                {{this.getWeather.weatherLocalDetails.humidity3Days}} km/h
             </span>
           <span *ngIf="!this.getWeather.isKm">
-                {{ (windSpeed3day * 0.621371) | number: '1.2-2'}} m/h
+                {{ (this.getWeather.weatherLocalDetails.humidity3Days * 0.621371) | number: '1.2-2'}} m/h
             </span>
       </div>
       <div class="show-or-not2">
           <span *ngIf="this.getWeather.isKm">
-                {{windSpeed4day}} km/h
+                {{this.getWeather.weatherLocalDetails.humidity4Days}} km/h
             </span>
           <span *ngIf="!this.getWeather.isKm">
-                {{ (windSpeed4day * 0.621371) | number: '1.2-2'}} m/h
+                {{ (this.getWeather.weatherLocalDetails.humidity4Days * 0.621371) | number: '1.2-2'}} m/h
             </span>
       </div>
       <div class="show-or-not">
           <span *ngIf="this.getWeather.isKm">
-                {{windSpeed5day}} km/h
+                {{this.getWeather.weatherLocalDetails.humidity5Days}} km/h
             </span>
           <span *ngIf="!this.getWeather.isKm">
-                {{ (windSpeed5day * 0.621371) | number: '1.2-2'}} m/h
+                {{ (this.getWeather.weatherLocalDetails.humidity5Days * 0.621371) | number: '1.2-2'}} m/h
             </span>
       </div>
 
       <div class="description table-grid-odd">Wind Direction</div>
-      <div class="table-grid-odd">{{windDirection3hr | number: '1.0-0' }}°
+      <div class="table-grid-odd">{{ this.getWeather.weatherLocalDetails.windDirection3Hrs | number: '1.0-0' }}°
         <app-wind-directions3hrs></app-wind-directions3hrs>
       </div>
-      <div class="table-grid-odd show-or-not3">{{windDirection9hr | number: '1.0-0' }}°
+      <div class="table-grid-odd show-or-not3">{{ this.getWeather.weatherLocalDetails.windDirection9Hrs | number: '1.0-0' }}°
         <app-wind-directions9hrs></app-wind-directions9hrs>
       </div>
-      <div class="table-grid-odd">{{windDirection15hr | number: '1.0-0' }}°
+      <div class="table-grid-odd">{{ this.getWeather.weatherLocalDetails.windDirection15Hrs | number: '1.0-0' }}°
           <app-wind-directions15hrs></app-wind-directions15hrs>
       </div>
-      <div class="table-grid-odd">{{windDirection1day | number: '1.0-0' }}°
+      <div class="table-grid-odd">{{ this.getWeather.weatherLocalDetails.windDirection1Day | number: '1.0-0' }}°
           <app-wind-directions1day></app-wind-directions1day>
       </div>
-      <div class="table-grid-odd">{{windDirection2day | number: '1.0-0' }}°
+      <div class="table-grid-odd">{{ this.getWeather.weatherLocalDetails.windDirection2Days | number: '1.0-0' }}°
           <app-wind-directions2days></app-wind-directions2days>
       </div>
-      <div class="table-grid-odd">{{windDirection3day | number: '1.0-0' }}°
+      <div class="table-grid-odd">{{ this.getWeather.weatherLocalDetails.windDirection3Days | number: '1.0-0' }}°
           <app-wind-directions3days></app-wind-directions3days>
       </div>
-      <div class="table-grid-odd show-or-not2">{{windDirection4day | number: '1.0-0' }}°
+      <div class="table-grid-odd show-or-not2">{{ this.getWeather.weatherLocalDetails.windDirection4Days | number: '1.0-0' }}°
         <app-wind-directions4days></app-wind-directions4days>
       </div >
-      <div class="table-grid-odd show-or-not">{{windDirection5day | number: '1.0-0' }}°
+      <div class="table-grid-odd show-or-not">{{ this.getWeather.weatherLocalDetails.windDirection5Days | number: '1.0-0' }}°
         <app-wind-directions5days></app-wind-directions5days>
       </div>
 

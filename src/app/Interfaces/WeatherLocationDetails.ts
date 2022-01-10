@@ -46,19 +46,8 @@ export interface WeatherLocalDetails {
   windDirection4Days: number;
   windDirection5Days: number;
 
-
-  sunriseToday?: string;
-  sunsetToday?: string;
-  sunriseTomorrow?: string;
-  sunsetTomorrow?: string;
-  sunrisePlus2Days?: string;
-  sunsetPlus2Days?: string;
-  sunrisePlus3Days?: string;
-  sunsetPlus3Days?: string;
-  sunrisePlus4Days?: string;
-  sunsetPlus4Days?: string;
-  sunrisePlus5Days?: string;
-  sunsetPlus5Days?: string;
+  sunrise: string;
+  sunset: string;
 
   nightOrDayNow: string;
   nightOrDay1Hr: string;

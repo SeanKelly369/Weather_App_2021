@@ -1,7 +1,7 @@
 export class InternationalCodes {
 
 public userLocationAdd(code : string): string {
-
+    console.log(code);
     switch (code) {
       case 'AF':
         return 'Afghanistan';

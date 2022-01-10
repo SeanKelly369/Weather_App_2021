@@ -69,19 +69,8 @@ export class WeatherDataService {
     windDirection4Days: 0,
     windDirection5Days: 0,
 
-
-    sunriseToday: '',
-    sunsetToday: '',
-    sunriseTomorrow: '',
-    sunsetTomorrow: '',
-    sunrisePlus2Days: '',
-    sunsetPlus2Days: '',
-    sunrisePlus3Days: '',
-    sunsetPlus3Days: '',
-    sunrisePlus4Days: '',
-    sunsetPlus4Days: '',
-    sunrisePlus5Days: '',
-    sunsetPlus5Days: '',
+    sunrise: '',
+    sunset: '',
 
     nightOrDayNow: 'd',
     nightOrDay1Hr: 'd',
@@ -172,27 +161,27 @@ export class WeatherDataService {
     const plus5Days = (new Date(currentTimeNum + (86400000 * 5)));
     const plus5DaysFormatted = plus5Days.getFullYear() + '-' + (plus5Days.getMonth() + 1 ) + '-' + plus5Days.getDate();
 
-    this.getSunriseSunsetToday(currentTimeFormatted).subscribe( (response: JSON) => {
-      console.log(response)
-      this.sunriseSunsetToday = response;
-    });
-    this.getSunriseSunsetTomorrow(tomorrowFormatted).subscribe( (response: JSON) => {
-      this.sunriseSunsetTomorrow = response;
-    });
-    this.getSunriseSunsetDay2(plus2DaysFormatted).subscribe( (response: JSON) => {
-      this.sunriseSunsetPlusTwo = response;
-    });
-    this.getSunriseSunsetDay3(plus3DaysFormatted).subscribe( (response: JSON) => {
-      console.log(response);
-      this.sunriseSunsetPlusThree = response;
-      console.log(this.sunriseSunsetPlusThree);
-    });
-    this.getSunriseSunsetDay4(plus4DaysFormatted).subscribe( (response: JSON) => {
-      this.sunriseSunsetPlusFour = response;
-    });
-    this.getSunriseSunsetDay5(plus5DaysFormatted).subscribe( (response: JSON) => {
-      this.sunriseSunsetPlusFive = response;
-    });
+    // this.getSunriseSunsetToday(currentTimeFormatted).subscribe( (response: JSON) => {
+    //   console.log(response)
+    //   this.sunriseSunsetToday = response;
+    // });
+    // this.getSunriseSunsetTomorrow(tomorrowFormatted).subscribe( (response: JSON) => {
+    //   this.sunriseSunsetTomorrow = response;
+    // });
+    // this.getSunriseSunsetDay2(plus2DaysFormatted).subscribe( (response: JSON) => {
+    //   this.sunriseSunsetPlusTwo = response;
+    // });
+    // this.getSunriseSunsetDay3(plus3DaysFormatted).subscribe( (response: JSON) => {
+    //   console.log(response);
+    //   this.sunriseSunsetPlusThree = response;
+    //   console.log(this.sunriseSunsetPlusThree);
+    // });
+    // this.getSunriseSunsetDay4(plus4DaysFormatted).subscribe( (response: JSON) => {
+    //   this.sunriseSunsetPlusFour = response;
+    // });
+    // this.getSunriseSunsetDay5(plus5DaysFormatted).subscribe( (response: JSON) => {
+    //   this.sunriseSunsetPlusFive = response;
+    // });
       
   }
 
@@ -205,19 +194,36 @@ export class WeatherDataService {
         // 0, 1, 3, 5, 8, 16, 24, 32
 
         // Weather icons' ids
-        this.weatherLocalDetails.weatherId1Hr = response.list[0].weather.id;
-        this.weatherLocalDetails.weatherId3Hrs = response.list[1].weather.id;
-        this.weatherLocalDetails.weatherId9Hrs = response.list[3].weather.id;
-        this.weatherLocalDetails.weatherId15Hrs = response.list[5].weather.id;
-        this.weatherLocalDetails.weather1Day = response.list[8].weather.id;
-        this.weatherLocalDetails.weather2Days = response.list[16].weather.id;
-        this.weatherLocalDetails.weather3Days = response.list[24].weather.id;
-        this.weatherLocalDetails.weather4Days = response.list[32].weather.id;
-        if(response.list[40].weather.id != null) {
-          this.weatherLocalDetails.weather5Days = response.list[40].weather.id;
+        this.weatherLocalDetails.weatherId1Hr = response.list[0].weather[0].id;
+        this.weatherLocalDetails.weatherId3Hrs = response.list[1].weather[0].id;
+        this.weatherLocalDetails.weatherId9Hrs = response.list[3].weather[0].id;
+        this.weatherLocalDetails.weatherId15Hrs = response.list[5].weather[0].id;
+        this.weatherLocalDetails.weather1Day = response.list[8].weather[0].id;
+        this.weatherLocalDetails.weather2Days = response.list[16].weather[0].id;
+        this.weatherLocalDetails.weather3Days = response.list[24].weather[0].id;
+        this.weatherLocalDetails.weather4Days = response.list[32].weather[0].id;
+        if(response.list[40] != null) {
+          this.weatherLocalDetails.weather5Days = response.list[40].weather[0].id;
         } else {
-          this.weatherLocalDetails.weather4Days = response.list[32].weather.id;
+          this.weatherLocalDetails.weather5Days = response.list[32].weather[0].id;
         }
+
+        // Night or Day
+        this.weatherLocalDetails.nightOrDayNow = response.list[0].sys.pod;
+        this.weatherLocalDetails.nightOrDay1Hr = response.list[0].sys.pod;
+        this.weatherLocalDetails.nightOrDayIn3Hrs = response.list[1].sys.pod;
+        this.weatherLocalDetails.nightOrDayIn9Hrs = response.list[3].sys.pod;
+        this.weatherLocalDetails.nightOrDayIn15Hrs = response.list[5].sys.pod;
+        this.weatherLocalDetails.nightOrDayIn1Day = response.list[8].sys.pod;
+        this.weatherLocalDetails.nightOrDayIn2Days = response.list[16].sys.pod;
+        this.weatherLocalDetails.nightOrDayIn3Days = response.list[24].sys.pod;
+        this.weatherLocalDetails.nightOrDayIn4Days = response.list[32].sys.pod;
+        if(response.list[40] != null) {
+          this.weatherLocalDetails.nightOrDayIn5Days = response.list[40].sys.pod;
+        } else {
+          this.weatherLocalDetails.nightOrDayIn5Days = response.list[32].sys.pod;
+        }
+    
 
         // Temperatures
         this.weatherLocalDetails.temperaturePlus1 = response.list[0].main.temp - 273.48; // 1 hr
@@ -235,13 +241,51 @@ export class WeatherDataService {
         }
 
         // Air pressure
-        this.weatherLocalDetails.humidityNow;
+        this.weatherLocalDetails.humidity1Hr = response.list[0].main.humidity;
+        this.weatherLocalDetails.humidity3Hrs = response.list[1].main.humidity;
+        this.weatherLocalDetails.humidity9Hrs = response.list[3].main.humidity;
+        this.weatherLocalDetails.humidity15Hrs = response.list[5].main.humidity;
+        this.weatherLocalDetails.humidity1Day = response.list[8].main.humidity;
+        this.weatherLocalDetails.humidity2Days = response.list[16].main.humidity;
+        this.weatherLocalDetails.humidity3Days = response.list[24].main.humidity;
+        this.weatherLocalDetails.humidity4Days = response.list[32].main.humidity;
+        if(response.list[40] != null) {
+          this.weatherLocalDetails.humidity5Days = response.list[40].main.humidity;
+        } else {
+          this.weatherLocalDetails.humidity5Days = response.list[32].main.humidity;
+        }
 
+        // Wind speed
+        this.weatherLocalDetails.windSpeed1Hr = response.list[0].wind.speed;
+        this.weatherLocalDetails.windSpeed3Hrs = response.list[1].wind.speed;
+        this.weatherLocalDetails.windSpeed9Hrs = response.list[3].wind.speed;
+        this.weatherLocalDetails.windSpeed15Hrs = response.list[5].wind.speed;
+        this.weatherLocalDetails.windSpeed1Day = response.list[8].wind.speed;
+        this.weatherLocalDetails.windSpeed2Days = response.list[16].wind.speed;
+        this.weatherLocalDetails.windSpeed3Days = response.list[24].wind.speed;
+        this.weatherLocalDetails.windSpeed4Days = response.list[32].wind.speed;
+        if(response.list[40] != null) {
+          this.weatherLocalDetails.windSpeed5Days = response.list[40].wind.speed;
+        } else {
+          this.weatherLocalDetails.windSpeed5Days = response.list[32].wind.speed;
+        }
 
-        this.weatherLocalDetails.location = response.city.name;
-        let countryCode = response.city.country;
-        this.weatherLocalDetails.country = this.internationalCodes.userLocationAdd(countryCode);
-      })
+        // Wind direction
+        this.weatherLocalDetails.windDirection1Hr = response.list[0].wind.deg;
+        this.weatherLocalDetails.windDirection3Hrs = response.list[1].wind.deg;
+        this.weatherLocalDetails.windDirection9Hrs = response.list[3].wind.deg;
+        this.weatherLocalDetails.windDirection15Hrs = response.list[5].wind.deg;
+        this.weatherLocalDetails.windDirection1Day = response.list[8].wind.deg;
+        this.weatherLocalDetails.windDirection2Days = response.list[16].wind.deg;
+        this.weatherLocalDetails.windDirection3Days = response.list[24].wind.deg;
+        this.weatherLocalDetails.windDirection4Days = response.list[32].wind.deg;
+        if(response.list[40] != null) {
+          this.weatherLocalDetails.windDirection5Days = response.list[40].wind.deg;
+        } else {
+          this.weatherLocalDetails.windDirection5Days = response.list[32].wind.deg;
+        }
+
+      });
 
     return this.fiveDayForecast;
   }
@@ -250,18 +294,34 @@ export class WeatherDataService {
     this.url = this.http.get<any>(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${this.appID}`)
     .subscribe( (response: any) => {
       console.log(response);
-      this.weatherLocalDetails.weatherIdNow = response.weather.id;
+      this.weatherLocalDetails.temperatureNow = response.main.temp - 273.48; 
+      this.weatherLocalDetails.weatherIdNow = response.weather[0].id;
       this.weatherLocalDetails.humidityNow = response.main.humidity;
       this.weatherLocalDetails.airPressureNow = response.main.pressure;
       this.weatherLocalDetails.windSpeedNow = response.wind.speed;
       this.weatherLocalDetails.windDirectionNow = response.wind.deg;
 
       this.weatherLocalDetails.location = response.name;
-      let countryCode = response.city.country;
+      let countryCode = response.sys.country;
       this.weatherLocalDetails.country = this.internationalCodes.userLocationAdd(countryCode);
+      this.weatherLocalDetails.sunrise = this.msToTime(response.sys.sunrise);
+      this.weatherLocalDetails.sunset = this.msToTime(response.sys.sunset);
 
     })
     return this.url;
+  }
+
+  public msToTime(duration : number): string {
+    const milliseconds: number = Math.floor((duration % 1000) / 100);
+    let seconds: number = Math.floor((duration / 1000) % 60);
+    let minutes: number = Math.floor((duration / (1000 * 60)) % 60);
+    let hours: number = Math.floor((duration / (1000 * 60 * 60)) % 24);
+  
+    hours = (hours < 10) ? 0 + hours : hours;
+    minutes = (minutes < 10) ? 0 + minutes : minutes;
+    seconds = (seconds < 10) ? 0 + seconds : seconds;
+  
+    return hours + ':' + minutes + ':' + seconds + '.' + milliseconds;
   }
 
   public getForeCast(): any {
