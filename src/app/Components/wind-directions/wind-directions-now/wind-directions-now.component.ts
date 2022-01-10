@@ -15,17 +15,6 @@ export class WindDirectionsNowComponent extends WindDirectionsParentComponent im
     super.ngOnInit();
   }
 
-  override async ngOnInit() {
-    await this.getWeather.initialize();
-    this.getLocationDetail();
-  }
-
-    getLocationDetail() {
-    this.getWeather.getLocationName().subscribe((data: any) => {
-      this.dayData = data.wind.deg;
-    });
-  }
-
-
+  
 }
 

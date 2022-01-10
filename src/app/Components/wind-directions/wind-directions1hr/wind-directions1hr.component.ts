@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component } from '@angular/core';
 import { WeatherDataService } from '../../../Services/weather-data.service';
 import { WindDirectionsParentComponent } from '../wind-directions-parent/wind-directions-parent.component';
 
@@ -6,26 +6,10 @@ import { WindDirectionsParentComponent } from '../wind-directions-parent/wind-di
   selector: 'app-wind-directions1hr',
   templateUrl: './wind-directions1hr.component.html'
 })
-export class WindDirections1hrComponent extends WindDirectionsParentComponent implements OnInit {
-
-  public windDirection: any;
-  isC: boolean = false;
+export class WindDirections1hrComponent extends WindDirectionsParentComponent {
 
   constructor(public override getWeather: WeatherDataService) {
     super(getWeather);
-    super.ngOnInit();
-  }
-
-
-  override async ngOnInit() {
-    await this.getWeather.initialize();
-    this.getWindData();
-  }
-
-    getWindData() {
-    this.getWeather.getForeCast().subscribe((data: any) => {
-      this.windDirection = data.list[1].wind.deg;
-    });
   }
 
 }
