@@ -33,7 +33,7 @@
                   <div class="v-separator"></div>
               </div>
               <div class='rightColumn'>
-                  {{this.humidity}}%
+                  {{this.getWeather.weatherLocalDetails.humidityNow}}%
               </div>
   
               <div>
@@ -43,7 +43,7 @@
                   <div class="v-separator"></div>
               </div>
               <div class='rightColumn'>
-                  {{this?.pressure | number: '1.0-0'}} mb
+                  {{this.getWeather.weatherLocalDetails.airPressureNow | number: '1.0-0'}} mb
               </div>
   
               <div></div>
@@ -58,10 +58,10 @@
               </div>
               <div class='rightColumn'>
                 <span *ngIf="this.getWeather.isKm">
-                  {{this.windSpeed}} km/h
+                  {{this.getWeather.weatherLocalDetails.windDirectionNow}} km/h
                 </span>
                 <span *ngIf="!this.getWeather.isKm">
-                  {{ (this.windSpeed * 0.621371) | number: '1.2-2'}} m/h
+                  {{ (this.getWeather.weatherLocalDetails.windSpeedNow * 0.621371) | number: '1.2-2'}} m/h
                 </span>
               </div>
   
@@ -70,7 +70,7 @@
               </div>
               <div></div>
               <div class='rightColumn'>
-                  {{this.windDirection || 0}}°
+                  {{this.getWeather.weatherLocalDetails.windDirectionNow || 0}}°
                   <app-wind-directions-now></app-wind-directions-now>
               </div>
               <div>
@@ -80,7 +80,7 @@
   
               </div>
               <div class='rightColumn'>
-                  {{this?.getWeather?.sunriseSunsetToday?.astronomical_twilight_begin}}
+                  {{this?.getWeather?.weatherLocalDetails?.sunrise}}
               </div>
   
               <div>
@@ -89,7 +89,7 @@
               <div>
               </div>
               <div class='rightColumn'>
-                  {{this?.getWeather?.sunriseSunsetToday?.astronomical_twilight_end}}
+                  {{this?.getWeather?.weatherLocalDetails?.sunset}}
               </div>
           </div>
       </div>

@@ -218,7 +218,7 @@ export class Countries {
         { city: 'Quebec City', coords: { lat: 46.829853, lon: -71.254028 } },
         { city: 'Toronto', coords: { lat: 43.651070, lon: -79.347015 } },
         { city: 'Montreal', coords: { lat: 45.508888, lon: -73.561668 } },
-        { city: 'Vancouver', coords: { lat: 59.246292, lon: -123.116226 } },
+        { city: 'Vancouver', coords: { lat: 49.246292, lon: -123.116226 } },
         { city: 'Edmonton', coords: { lat: 53.631611, lon: -113.323975 } },
         { city: 'Winnipeg', coords: { lat: 49.895077, lon: -97.138451 } },
         { city: 'Halifax', coords: { lat: 44.651070, lon: -63.582687 } },
