@@ -152,6 +152,8 @@ public userLocationAdd(code : string): string {
         return 'French Polynesia';
       case 'TF':
         return 'French Southern Territories';
+      case 'FR':
+        return 'France';
       case 'GA':
         return 'Gabon';
 

@@ -946,7 +946,7 @@ export class Countries {
       { city: 'Khujand', coords: { lat: 40.273763, lon: 69.638962 } }
     ]
   },
-  { country: 'Kyrgystan',
+  { country: 'Kyrgyzstan',
     id: 166,
     cities: [
       { city: 'Bishkek', coords: { lat: 42.869422, lon: 74.600191 } },

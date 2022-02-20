@@ -30,26 +30,26 @@ export class WeatherNowComponent extends AppComponent implements OnInit {
 
   override ngOnInit() {
     this.getWeather.initialize();
-    this.getLocationDetail();
-    this.getDayData();
+    // this.getLocationDetail();
+    // this.getDayData();
   }
 
-    getDayData() {
-    this.getWeather.getSunriseSunsetToday(this.filler).subscribe((data: any) => {
-      this.dayData = data;
-    });
-  }
+    // getDayData() {
+    // this.getWeather.getSunriseSunsetToday(this.filler).subscribe((data: any) => {
+    //   this.dayData = data;
+    // });
+  // }
 
-    getLocationDetail() {
-    this.getWeather.getLocationName().subscribe((data: any) => {
-      console.log(data);
-      this.localWeather = data;
-      this.humidity = this.localWeather.main.humidity;
-      this.pressure = this.localWeather.main.pressure;
-      this.windSpeed = this.localWeather.wind.speed;
-      this.windDirection = this.localWeather.wind.deg;
-    });
-  }
+  //   getLocationDetail() {
+  //   this.getWeather.getLocationName().subscribe((data: any) => {
+  //     console.log(data);
+  //     this.localWeather = data;
+  //     this.humidity = this.localWeather.main.humidity;
+  //     this.pressure = this.localWeather.main.pressure;
+  //     this.windSpeed = this.localWeather.wind.speed;
+  //     this.windDirection = this.localWeather.wind.deg;
+  //   });
+  // }
 
 
   ToggleWeatherMeasurement() {

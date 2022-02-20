@@ -123,13 +123,17 @@ export class GeoLocMapComponent implements OnInit {
 
               this.countryCoords.forEach( (element: any) => {
                 if(countryLocation === element.city) {
-                  let queryCoordinates = element.coords; // TODO make http get request
-                  console.log(queryCoordinates);
+                  let queryCoordinates = element.coords;
+                  // console.log(queryCoordinates);
                   this.getWeather.latitude = queryCoordinates.lat;
                   this.getWeather.latitude = queryCoordinates.lon;
 
                   this.getWeather.getForeCastNew(queryCoordinates.lat, queryCoordinates.lon);
                   this.getWeather.getLocationNameNew(queryCoordinates.lat, queryCoordinates.lon);
+                  this.getWeather.getSunriseSunsetDay4(queryCoordinates.lat, queryCoordinates.lon)
+                    .subscribe( (a: any) => {
+                      console.log(a);
+                    } )
                 }
               });
             }))

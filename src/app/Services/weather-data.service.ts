@@ -126,7 +126,19 @@ export class WeatherDataService {
 
   public isCLocal: boolean = false;
   public temp: number = 273.48;
-  public currentTime = Date.now();
+  public currentTime: Date = new Date;
+  public currentTimeFormatted: string = '';
+  private currentTimeNum: number = 0;
+  private tomorrow!: Date;
+  public tomorrowFormatted: string = '';
+  private plus2Days!: Date;
+  public plus2DaysFormatted: string = '';
+  private plus3Days!: Date;
+  public plus3DaysFormatted: string = '';
+  private plus4Days!: Date;
+  public plus4DaysFormatted: string = '';
+  private plus5Days!: Date;
+  public plus5DaysFormatted: string = '';
 
   constructor(private http: HttpClient) { }
 
@@ -139,50 +151,17 @@ export class WeatherDataService {
     }
 
     this.getForeCast().subscribe( (response: any) => {
-      console.log(response);
+      // console.log(response);
       this.weatherLocalDetails.temperatureNow = response.list[0].main.temp - 273.48;
     });
 
     this.getLocationName().subscribe( (response: JSON) => {
-      console.log(response);
+      // console.log(response);
+      this.getSunriseSunsetToday(this.latitude, this.longitude).subscribe( (response: JSON) => {
+        console.log(response)
+        this.sunriseSunsetToday = response;
+      });
     })
-
-    const currentTime = new Date();
-    const currentTimeFormatted = currentTime.getFullYear() + '-' + (currentTime.getMonth()+ 1) + '-' + currentTime.getDate();
-    const currentTimeNum = currentTime.getTime();
-    const tomorrow = (new Date(currentTimeNum +86400000));
-    const tomorrowFormatted = tomorrow.getFullYear() + '-' + (tomorrow.getMonth() + 1) + '-' + tomorrow.getDate();
-    const plus2Days = (new Date(currentTimeNum + (86400000 * 2)));
-    const plus2DaysFormatted = plus2Days.getFullYear() + '-' + (plus2Days.getMonth() + 1) + '-' + plus2Days.getDate();
-    const plus3Days = (new Date(currentTimeNum + (86400000 * 3)));
-    const plus3DaysFormatted = plus3Days.getFullYear() + '-' + (plus3Days.getMonth() + 1 ) + '-' + plus3Days.getDate();
-    const plus4Days = (new Date(currentTimeNum + (86400000 * 4)));
-    const plus4DaysFormatted = plus4Days.getFullYear() + '-' + (plus4Days.getMonth() + 1 ) + '-' + plus4Days.getDate();
-    const plus5Days = (new Date(currentTimeNum + (86400000 * 5)));
-    const plus5DaysFormatted = plus5Days.getFullYear() + '-' + (plus5Days.getMonth() + 1 ) + '-' + plus5Days.getDate();
-
-    // this.getSunriseSunsetToday(currentTimeFormatted).subscribe( (response: JSON) => {
-    //   console.log(response)
-    //   this.sunriseSunsetToday = response;
-    // });
-    // this.getSunriseSunsetTomorrow(tomorrowFormatted).subscribe( (response: JSON) => {
-    //   this.sunriseSunsetTomorrow = response;
-    // });
-    // this.getSunriseSunsetDay2(plus2DaysFormatted).subscribe( (response: JSON) => {
-    //   this.sunriseSunsetPlusTwo = response;
-    // });
-    // this.getSunriseSunsetDay3(plus3DaysFormatted).subscribe( (response: JSON) => {
-    //   console.log(response);
-    //   this.sunriseSunsetPlusThree = response;
-    //   console.log(this.sunriseSunsetPlusThree);
-    // });
-    // this.getSunriseSunsetDay4(plus4DaysFormatted).subscribe( (response: JSON) => {
-    //   this.sunriseSunsetPlusFour = response;
-    // });
-    // this.getSunriseSunsetDay5(plus5DaysFormatted).subscribe( (response: JSON) => {
-    //   this.sunriseSunsetPlusFive = response;
-    // });
-      
   }
 
   public getForeCastNew(lat: number, lon: number): object {
@@ -293,7 +272,7 @@ export class WeatherDataService {
   public getLocationNameNew(lat: number, lon: number) {
     this.url = this.http.get<any>(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${this.appID}`)
     .subscribe( (response: any) => {
-      console.log(response);
+      // console.log(response);
       this.weatherLocalDetails.temperatureNow = response.main.temp - 273.48; 
       this.weatherLocalDetails.weatherIdNow = response.weather[0].id;
       this.weatherLocalDetails.humidityNow = response.main.humidity;
@@ -343,19 +322,31 @@ export class WeatherDataService {
   public setSunriseSunsetApiHeaders() : HttpHeaders {
     let headers: HttpHeaders = new HttpHeaders();
     headers = headers.set('Accept', 'application/json')
+      .set('Origin', '*')
       .set('Access-Control-Allow-Origin', '*')
-      .set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization')
-      .set('Access-Control-Allow-Methods', 'GET');
+      .set('Access-Control-Allow-Headers', 'Content-Type')
+      .set('Access-Control-Allow-Methods', 'POST, GET');
 
       return headers;
   }
 
   // Sunrise and sunset today
-  public getSunriseSunsetToday(currentTimeFormatted: any | undefined) {
+  public getSunriseSunsetToday(lat: number, lon: number) {
     try {
 
+      let day = this.currentTime.getDate();
+      let year = this.currentTime.getFullYear();
+      let month:number = this.currentTime.getMonth() + 1;
+      let monthStr:string = month.toString();
+      if(month > 9) {
+        monthStr = '0' + month;
+      }
+
+      const date = `${year}-${monthStr}-${day}`;
+      console.log(date);
+     
       this.sunriseSunsetToday =
-        this.http.get<any>(`https://api.sunrise-sunset.org/json?lat=${this.latitude}&lng=${this.longitude}&date=${currentTimeFormatted}`, 
+        this.http.get<any>(`https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}&date=${date}`, 
         { headers: this. setSunriseSunsetApiHeaders(), responseType: 'json' } );
       return this.sunriseSunsetToday;
       
@@ -366,11 +357,12 @@ export class WeatherDataService {
 
 
   // Sunrise and sunset tomorrow
-  public getSunriseSunsetTomorrow(tomorrow: string | undefined) {
+  public getSunriseSunsetTomorrow(lat: number, lon: number): object {
     try {
-
+      this.tomorrow = (new Date(this.currentTimeNum +86400000));
+      this.tomorrowFormatted = this.tomorrow.getFullYear() + '-' + (this.tomorrow.getMonth() + 1) + '-' + this.tomorrow.getDate();
       this.sunriseSunsetTomorrow =
-      this.http.get<any>(`https://api.sunrise-sunset.org/json?lat=${this.latitude}&lng=${this.longitude}&date=${tomorrow}`, 
+      this.http.get<any>(`https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}&date=${this.tomorrowFormatted}`, 
         {headers: this.setSunriseSunsetApiHeaders(), responseType: 'json'});
       return this.sunriseSunsetTomorrow;
       
@@ -380,10 +372,12 @@ export class WeatherDataService {
   }
 
   // Sunrise and sunset 2 days plus
-  public getSunriseSunsetDay2(plus2Days: string | undefined) {
+  public getSunriseSunsetDay2(lat: number, lon: number): object {
     try {
+      this.plus2Days = (new Date(this.currentTimeNum + (86400000 * 2)));
+      this.plus2DaysFormatted = this.plus2Days.getFullYear() + '-' + (this.plus2Days.getMonth() + 1) + '-' + this.plus2Days.getDate();
       this.sunriseSunsetPlusTwo =
-      this.http.get<any>(`https://api.sunrise-sunset.org/json?lat=${this.latitude}&lng=${this.longitude}&date=${plus2Days}`, 
+      this.http.get<any>(`https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}&date=${this.plus2Days}`, 
         {headers: this.setSunriseSunsetApiHeaders(), responseType: 'json'});
       return this.sunriseSunsetPlusTwo;
       
@@ -394,10 +388,12 @@ export class WeatherDataService {
   }
 
   // Sunrise and sunset 3 days plus
-  public getSunriseSunsetDay3(plus3Days: string | undefined) {
+  public getSunriseSunsetDay3(lat: number, lon: number) {
     try {
+      this.plus3Days = (new Date(this.currentTimeNum + (86400000 * 3)));
+      this.plus3DaysFormatted = this.plus3Days.getFullYear() + '-' + (this.plus3Days.getMonth() + 1 ) + '-' + this.plus3Days.getDate();
       this.sunriseSunsetPlusThree =
-      this.http.get<any>(`https://api.sunrise-sunset.org/json?lat=${this.latitude}&lng=${this.longitude}&date=${plus3Days}`, 
+      this.http.get<any>(`https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}&date=${this.plus3Days}`, 
         {headers: this.setSunriseSunsetApiHeaders(), responseType: 'json'});
       return this.sunriseSunsetPlusThree;
       
@@ -407,10 +403,12 @@ export class WeatherDataService {
   }
 
   // Sunrise and sunset 4 days plus
-  public getSunriseSunsetDay4(plus4Days: string | undefined) {
+  public getSunriseSunsetDay4(lat: number, lon: number) {
     try {
+      this.plus4Days = (new Date(this.currentTimeNum + (86400000 * 4)));
+      this.plus4DaysFormatted = this.plus4Days.getFullYear() + '-' + (this.plus4Days.getMonth() + 1 ) + '-' + this.plus4Days.getDate();
       this.sunriseSunsetPlusFour =
-      this.http.get<any>(`https://api.sunrise-sunset.org/json?lat=${this.latitude}&lng=${this.longitude}&date=${plus4Days}`, 
+      this.http.get<any>(`https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}&date=${this.plus4Days}`, 
         {headers: this.setSunriseSunsetApiHeaders(), responseType: 'json'});      
         return this.sunriseSunsetPlusFour;
       
@@ -420,10 +418,12 @@ export class WeatherDataService {
   }
 
   // Sunrise and sunset 5 days plus
-  public getSunriseSunsetDay5(plus5Days: string | undefined) {
+  public getSunriseSunsetDay5(lat: number, lon: number) {
     try {
+      this.plus5Days = (new Date(this.currentTimeNum + (86400000 * 5)));
+      this.plus5DaysFormatted = this.plus5Days.getFullYear() + '-' + (this.plus5Days.getMonth() + 1 ) + '-' + this.plus5Days.getDate();
       this.sunriseSunsetPlusFive =
-      this.http.get<any>(`https://api.sunrise-sunset.org/json?lat=${this.latitude}&lng=${this.longitude}&date=${plus5Days}`, 
+      this.http.get<any>(`https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}&date=${this.plus5Days}`, 
         {headers: this.setSunriseSunsetApiHeaders(), responseType: 'json'});      
         return this.sunriseSunsetPlusFive;
       
